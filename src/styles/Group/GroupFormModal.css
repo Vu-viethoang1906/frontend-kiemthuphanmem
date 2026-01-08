@@ -1,0 +1,219 @@
+/* GroupFormModal Component Styles - Extracted from group.css */
+
+.group-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.group-modal232 {
+  width: 100%;
+  max-width: 560px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  animation: modalZoomIn 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.modal-header454 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 10px;
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+  border-bottom: 1px solid #000000 !important;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: -0.5px;
+  text-transform: none;
+}
+
+.modal-header454 .btn-ghost {
+  padding: 0;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 400;
+  backdrop-filter: blur(10px);
+}
+
+.modal-header454 .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.group-modal232 form {
+  padding: 24px 32px;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.form-row23 {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+}
+
+.form-row23:first-of-type {
+  margin-top: 0;
+}
+
+.form-row23 label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-row23 input,
+.form-row23 textarea {
+  width: 100%;
+  padding: 15px 18px;
+  background: #f9fafb;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  color: #1f2937;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  min-height: 50px;
+  box-sizing: border-box;
+}
+
+.form-row23 input:hover {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+.form-row23 input:focus,
+.form-row23 textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.08);
+}
+
+.form-row23 input::placeholder,
+.form-row23 textarea::placeholder {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 10px;
+  
+  background: #f9fafb;
+  border-top: 1px solid #000000 !important;
+}
+
+.modal-actions .btn-primary36 {
+  padding: 13px 28px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: none;
+  letter-spacing: 0;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+}
+
+.modal-actions .btn-primary36:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(102, 126, 234, 0.35);
+}
+
+.modal-actions .btn-primary36:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.25);
+}
+
+.modal-actions .btn-secondary {
+  padding: 13px 28px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: #ffffff;
+  color: #6b7280;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: none;
+  letter-spacing: 0;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-actions .btn-secondary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalZoomIn {
+  from {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}

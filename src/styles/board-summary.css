@@ -1,0 +1,98 @@
+.board-summary{display:flex;gap:20px;align-items:flex-start;justify-content:center;padding:18px 12px;flex-wrap:wrap}
+.bs-header{width:100%;max-width:980px;margin-bottom:10px}
+.bs-header h2{margin:0;font-size:18px;color:#0f172a}
+.bs-top-row{display:flex;gap:18px;width:100%;max-width:980px}
+.bs-main-card{display:flex;gap:20px;flex:1;background:#fff;padding:16px;border-radius:8px;border:1px solid #eef2f7;min-height:280px;align-items:flex-start}
+.bs-left-merge{flex:0 0 300px;min-width:260px;padding-right:8px}
+.bs-right-merge{flex:1;display:flex;align-items:center;justify-content:center}
+.bs-center-merge{flex:1;display:flex;align-items:center;justify-content:center}
+.bs-right-card{width:300px;min-width:220px;display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:12px}
+.bs-left-card .bs-section-title,.bs-donut-card .bs-section-title{margin-bottom:8px}
+.bs-left{min-width:220px;display:flex;flex-direction:column;gap:8px}
+.bs-section-title{font-size:13px;font-weight:600}
+.bs-legend{display:flex;flex-direction:column;gap:6px}
+.bs-muted{color:#6b7280}
+.bs-legend-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 0}
+.bs-legend-left{display:flex;align-items:center;gap:10px;min-width:170px}
+.bs-color-swatch{width:12px;height:12px;border-radius:3px;display:inline-block}
+.bs-legend-name{color:#374151}
+.bs-legend-count{color:#6b7280}
+.bs-legend-count .bs-muted{margin-left:8px;color:#9ca3af}
+.bs-stats{margin-top:8px;color:#475569;font-size:13px}
+.bs-donut-wrapper{width:280px;height:280px;display:flex;align-items:center;justify-content:center}
+.bs-donut-total{font-size:28px;font-weight:700;fill:#2d3748}
+.bs-donut-label{font-size:13px;fill:#718096}
+.bs-actions{position:relative;width:100%;max-width:720px;display:flex;justify-content:flex-end;margin-top:6px}
+.bs-more-btn{padding:6px 10px;border-radius:6px;border:1px solid #e6eef7;background:white;cursor:pointer}
+.bs-breakdown{width:100%;max-width:720px;margin-top:6px}
+.bs-breakdown-row{display:flex;gap:18px;flex-wrap:wrap}
+.bs-breakdown-column{min-width:220px}
+.bs-breakdown-item{display:flex;justify-content:space-between;align-items:center}
+.bs-col-name{color:#374151}
+.bs-col-count{color:#6b7280}
+.bs-col-count .bs-muted{margin-left:8px;color:#9ca3af}
+.bs-swim-details{width:100%;max-width:980px;margin-top:12px;padding:12px;border-radius:8px;background:#ffffff;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+.bs-swimlane{border-top:1px solid #eef2f7;padding-top:10px}
+.bs-swimlane-header{display:flex;justify-content:space-between;align-items:center}
+.bs-swimlane-left{display:flex;align-items:center;gap:10px}
+.bs-swimlane-name{font-weight:600}
+.bs-swimlane-count{color:#6b7280}
+.bs-swim-cards{margin-top:8px;display:flex;gap:12px;flex-wrap:wrap}
+.bs-swim-card{min-width:140px;padding:8px;border-radius:6px;background:#fbfdff;border:1px solid #eef2f7}
+.bs-swim-card-title{font-size:13px;color:#374151}
+.bs-swim-card-count{font-size:12px;color:#6b7280;margin-top:6px}
+.bs-progress-arc{transition:stroke-dashoffset 600ms ease, stroke 300ms ease}
+/* palette colors classes */
+.bs-color-0{background:#6366F1}
+.bs-color-1{background:#06B6D4}
+.bs-color-2{background:#10B981}
+.bs-color-3{background:#F59E0B}
+.bs-color-4{background:#EF4444}
+.bs-color-5{background:#8B5CF6}
+.bs-color-6{background:#F97316}
+.bs-color-7{background:#3B82F6}
+.bs-color-8{background:#EC4899}
+.bs-color-9{background:#94A3B8}
+.bs-tags-section{margin-top:12px}
+.bs-tag-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.bs-tag-cell-left{flex:0 0 16ch;max-width:16ch}
+.bs-tag-cell-right{flex:1;display:flex;align-items:center;gap:12px;min-width:0}
+.bs-tag-name{color:#374151;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bs-tag-bar{flex:1;height:12px;background:#eef2f7;border-radius:6px;overflow:hidden}
+.bs-tag-fill{height:100%;background:#10b981;border-radius:6px}
+.bs-tag-stats{min-width:90px;text-align:right;color:#6b7280;font-size:12px}
+.bs-mt-8{margin-top:8px}
+.bs-flex-col-gap{display:flex;flex-direction:column;gap:6px}
+.bs-col-gap-18{display:flex;gap:18px;flex-direction:column}
+.bs-swim-details-wrapper{width:100%;max-width:980px;margin-top:12px;padding:12px;border-radius:8px;background:#ffffff;box-shadow:0 6px 18px rgba(15,23,42,0.06)}
+.bs-h4-reset{margin:0 0 8px 0}
+.bs-tag-fill{height:100%;background:#10b981;border-radius:6px;width:var(--pct,0%)}
+.bs-swim-card-swatch{width:10px;height:10px;border-radius:2px;margin-right:8px;display:inline-block}
+/* Recent activity */
+.bs-activities-section{margin-top:14px}
+.bs-activity-row{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px dashed #eef2f7}
+.bs-activity-avatar{width:36px;height:36px;border-radius:8px;background:#e6eef7;color:#0f172a;display:flex;align-items:center;justify-content:center;font-weight:700}
+.bs-activity-body{flex:1;min-width:0}
+.bs-activity-title{font-size:13px}
+.bs-activity-sub{font-size:12px;color:#6b7280}
+.bs-activity-time{font-size:12px;min-width:76px;text-align:right}
+.bs-compact-activities{margin-top:12px}
+.bs-compact-row{padding:6px 0;border-bottom:1px solid rgba(14,20,30,0.03)}
+.bs-activity-sub{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Overview small stats box */
+.bs-box{background:#fff;padding:10px;border-radius:8px;border:1px solid #eef2f7}
+.bs-stats-box{width:100%}
+.bs-box-body{display:flex;flex-direction:column;gap:6px}
+.bs-overview-row{display:flex;justify-content:space-between;align-items:center}
+.bs-overview-label{color:#374151}
+.bs-overview-value{color:#0f172a;font-weight:700}
+.bs-mini-bar{height:8px;background:#eef2f7;border-radius:6px;overflow:hidden;margin-top:6px}
+.bs-mini-bar-fill{height:100%;background:linear-gradient(90deg,#10b981,#06b6d4);width:0%}
+
+/* Activities box */
+.bs-activities-box{width:100%;display:flex;flex-direction:column;flex:1;min-height:120px;max-height:380px;overflow:auto}
+.bs-activities-list{display:flex;flex-direction:column;gap:8px;padding:6px}
+.bs-activity-row{display:flex;align-items:center;gap:12px;padding:8px;border-bottom:1px dashed #eef2f7}
+.bs-activity-row:last-child{border-bottom:none}
+.bs-activity-time{font-size:12px;color:#6b7280;min-width:64px;text-align:right}

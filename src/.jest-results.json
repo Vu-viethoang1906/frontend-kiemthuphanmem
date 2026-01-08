@@ -1,0 +1,1572 @@
+{
+  "numFailedTestSuites": 0,
+  "numFailedTests": 0,
+  "numPassedTestSuites": 28,
+  "numPassedTests": 94,
+  "numPendingTestSuites": 16,
+  "numPendingTests": 16,
+  "numRuntimeErrorTestSuites": 0,
+  "numTodoTests": 0,
+  "numTotalTestSuites": 44,
+  "numTotalTests": 110,
+  "openHandles": [],
+  "snapshot": {
+    "added": 0,
+    "didUpdate": false,
+    "failure": false,
+    "filesAdded": 0,
+    "filesRemoved": 0,
+    "filesRemovedList": [],
+    "filesUnmatched": 0,
+    "filesUpdated": 0,
+    "matched": 0,
+    "total": 0,
+    "unchecked": 0,
+    "uncheckedKeysByFile": [],
+    "unmatched": 0,
+    "updated": 0
+  },
+  "startTime": 1761808811650,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "AIChatModal"
+          ],
+          "failureMessages": [],
+          "fullName": "AIChatModal sends a message and renders assistant reply bubble",
+          "location": null,
+          "status": "passed",
+          "title": "sends a message and renders assistant reply bubble"
+        },
+        {
+          "ancestorTitles": [
+            "AIChatModal"
+          ],
+          "failureMessages": [],
+          "fullName": "AIChatModal calls onClose when close button is clicked",
+          "location": null,
+          "status": "passed",
+          "title": "calls onClose when close button is clicked"
+        }
+      ],
+      "endTime": 1761808815555,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\AIChatModal.test.tsx",
+      "startTime": 1761808813622,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "analyticsApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "analyticsApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808815901,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.analyticsApi.test.ts",
+      "startTime": 1761808815652,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "GuideModal"
+          ],
+          "failureMessages": [],
+          "fullName": "GuideModal navigates pages via next/prev and dots; closes properly",
+          "location": null,
+          "status": "passed",
+          "title": "navigates pages via next/prev and dots; closes properly"
+        }
+      ],
+      "endTime": 1761808815924,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\GuideModal.test.tsx",
+      "startTime": 1761808813617,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "NotificationBell"
+          ],
+          "failureMessages": [],
+          "fullName": "NotificationBell renders bell and opens dropdown with header and tabs",
+          "location": null,
+          "status": "passed",
+          "title": "renders bell and opens dropdown with header and tabs"
+        },
+        {
+          "ancestorTitles": [
+            "NotificationBell"
+          ],
+          "failureMessages": [],
+          "fullName": "NotificationBell shows empty when no tasks",
+          "location": null,
+          "status": "passed",
+          "title": "shows empty when no tasks"
+        }
+      ],
+      "endTime": 1761808815977,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\NotificationBell.test.tsx",
+      "startTime": 1761808813617,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "SwimlaneManager"
+          ],
+          "failureMessages": [],
+          "fullName": "SwimlaneManager renders swimlanes list after load",
+          "location": null,
+          "status": "passed",
+          "title": "renders swimlanes list after load"
+        },
+        {
+          "ancestorTitles": [
+            "SwimlaneManager"
+          ],
+          "failureMessages": [],
+          "fullName": "SwimlaneManager opens add modal and creates swimlane",
+          "location": null,
+          "status": "passed",
+          "title": "opens add modal and creates swimlane"
+        },
+        {
+          "ancestorTitles": [
+            "SwimlaneManager"
+          ],
+          "failureMessages": [],
+          "fullName": "SwimlaneManager edits and saves swimlane name",
+          "location": null,
+          "status": "passed",
+          "title": "edits and saves swimlane name"
+        },
+        {
+          "ancestorTitles": [
+            "SwimlaneManager"
+          ],
+          "failureMessages": [],
+          "fullName": "SwimlaneManager deletes a swimlane after confirmation",
+          "location": null,
+          "status": "passed",
+          "title": "deletes a swimlane after confirmation"
+        }
+      ],
+      "endTime": 1761808816148,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\SwimlaneManager.test.tsx",
+      "startTime": 1761808813599,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "ColumnManager"
+          ],
+          "failureMessages": [],
+          "fullName": "ColumnManager renders columns and marks done column",
+          "location": null,
+          "status": "passed",
+          "title": "renders columns and marks done column"
+        },
+        {
+          "ancestorTitles": [
+            "ColumnManager"
+          ],
+          "failureMessages": [],
+          "fullName": "ColumnManager sets a column as done",
+          "location": null,
+          "status": "passed",
+          "title": "sets a column as done"
+        },
+        {
+          "ancestorTitles": [
+            "ColumnManager"
+          ],
+          "failureMessages": [],
+          "fullName": "ColumnManager edits and saves a column name",
+          "location": null,
+          "status": "passed",
+          "title": "edits and saves a column name"
+        },
+        {
+          "ancestorTitles": [
+            "ColumnManager"
+          ],
+          "failureMessages": [],
+          "fullName": "ColumnManager opens add modal and creates column",
+          "location": null,
+          "status": "passed",
+          "title": "opens add modal and creates column"
+        },
+        {
+          "ancestorTitles": [
+            "ColumnManager"
+          ],
+          "failureMessages": [],
+          "fullName": "ColumnManager deletes a column after confirmation",
+          "location": null,
+          "status": "passed",
+          "title": "deletes a column after confirmation"
+        }
+      ],
+      "endTime": 1761808816161,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\ColumnManager.test.tsx",
+      "startTime": 1761808813590,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "centerApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "centerApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808816216,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.centerApi.test.ts",
+      "startTime": 1761808815948,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "centerMemberApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "centerMemberApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808816273,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.centerMemberApi.test.ts",
+      "startTime": 1761808816021,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [],
+          "failureMessages": [],
+          "fullName": "App renders without crashing",
+          "location": null,
+          "status": "passed",
+          "title": "App renders without crashing"
+        }
+      ],
+      "endTime": 1761808816543,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\App.test.tsx",
+      "startTime": 1761808813608,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "Sidebar"
+          ],
+          "failureMessages": [],
+          "fullName": "Sidebar renders menus and toggles admin section",
+          "location": null,
+          "status": "passed",
+          "title": "renders menus and toggles admin section"
+        },
+        {
+          "ancestorTitles": [
+            "Sidebar"
+          ],
+          "failureMessages": [],
+          "fullName": "Sidebar renders teams and toggles teams section",
+          "location": null,
+          "status": "passed",
+          "title": "renders teams and toggles teams section"
+        },
+        {
+          "ancestorTitles": [
+            "Sidebar"
+          ],
+          "failureMessages": [],
+          "fullName": "Sidebar navigates when clicking menu item",
+          "location": null,
+          "status": "passed",
+          "title": "navigates when clicking menu item"
+        }
+      ],
+      "endTime": 1761808816621,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\Sidebar.test.tsx",
+      "startTime": 1761808816191,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "Pagination"
+          ],
+          "failureMessages": [],
+          "fullName": "Pagination renders nothing when totalPages <= 1",
+          "location": null,
+          "status": "passed",
+          "title": "renders nothing when totalPages <= 1"
+        },
+        {
+          "ancestorTitles": [
+            "Pagination"
+          ],
+          "failureMessages": [],
+          "fullName": "Pagination disables prev on first page and next on last page",
+          "location": null,
+          "status": "passed",
+          "title": "disables prev on first page and next on last page"
+        },
+        {
+          "ancestorTitles": [
+            "Pagination"
+          ],
+          "failureMessages": [],
+          "fullName": "Pagination calls onPageChange when clicking a page number",
+          "location": null,
+          "status": "passed",
+          "title": "calls onPageChange when clicking a page number"
+        },
+        {
+          "ancestorTitles": [
+            "Pagination"
+          ],
+          "failureMessages": [],
+          "fullName": "Pagination disables next on last page and prev works",
+          "location": null,
+          "status": "passed",
+          "title": "disables next on last page and prev works"
+        }
+      ],
+      "endTime": 1761808816738,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\Pagination.test.tsx",
+      "startTime": 1761808816082,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "Components smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Components smoke render renders CommentSection",
+          "location": null,
+          "status": "passed",
+          "title": "renders CommentSection"
+        },
+        {
+          "ancestorTitles": [
+            "Components smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Components smoke render renders SupportCenter",
+          "location": null,
+          "status": "passed",
+          "title": "renders SupportCenter"
+        },
+        {
+          "ancestorTitles": [
+            "Components smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Components smoke render renders Pagination",
+          "location": null,
+          "status": "passed",
+          "title": "renders Pagination"
+        },
+        {
+          "ancestorTitles": [
+            "Components smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Components smoke render renders PageWrapper",
+          "location": null,
+          "status": "passed",
+          "title": "renders PageWrapper"
+        }
+      ],
+      "endTime": 1761808816805,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\components.smoke.test.tsx",
+      "startTime": 1761808816177,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "usePermissions"
+          ],
+          "failureMessages": [],
+          "fullName": "usePermissions grants wildcard for admin/System_Manager",
+          "location": null,
+          "status": "passed",
+          "title": "grants wildcard for admin/System_Manager"
+        },
+        {
+          "ancestorTitles": [
+            "usePermissions"
+          ],
+          "failureMessages": [],
+          "fullName": "usePermissions loads permissions for non-admin via API",
+          "location": null,
+          "status": "passed",
+          "title": "loads permissions for non-admin via API"
+        },
+        {
+          "ancestorTitles": [
+            "usePermissions"
+          ],
+          "failureMessages": [],
+          "fullName": "usePermissions returns empty permissions when no userId",
+          "location": null,
+          "status": "passed",
+          "title": "returns empty permissions when no userId"
+        }
+      ],
+      "endTime": 1761808816850,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\usePermissions.test.tsx",
+      "startTime": 1761808816235,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "columnApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "columnApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808816887,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.columnApi.test.ts",
+      "startTime": 1761808816645,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "ModalProvider"
+          ],
+          "failureMessages": [],
+          "fullName": "ModalProvider shows alert modal and closes via OK",
+          "location": null,
+          "status": "passed",
+          "title": "shows alert modal and closes via OK"
+        },
+        {
+          "ancestorTitles": [
+            "ModalProvider"
+          ],
+          "failureMessages": [],
+          "fullName": "ModalProvider resolves confirm ok/cancel correctly",
+          "location": null,
+          "status": "passed",
+          "title": "resolves confirm ok/cancel correctly"
+        }
+      ],
+      "endTime": 1761808816860,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\ModalProvider.test.tsx",
+      "startTime": 1761808816295,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "api.userApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "api.userApi tests removed skipped by removal policy",
+          "location": null,
+          "status": "pending",
+          "title": "skipped by removal policy"
+        }
+      ],
+      "endTime": 1761808817147,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.userApi.test.ts",
+      "startTime": 1761808816916,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Dashboard",
+          "location": null,
+          "status": "passed",
+          "title": "renders Dashboard"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders DashboardHome",
+          "location": null,
+          "status": "passed",
+          "title": "renders DashboardHome"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Introduction",
+          "location": null,
+          "status": "passed",
+          "title": "renders Introduction"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Projects",
+          "location": null,
+          "status": "passed",
+          "title": "renders Projects"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Groups",
+          "location": null,
+          "status": "passed",
+          "title": "renders Groups"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Reports",
+          "location": null,
+          "status": "passed",
+          "title": "renders Reports"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Settings",
+          "location": null,
+          "status": "passed",
+          "title": "renders Settings"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders TemplateManagement",
+          "location": null,
+          "status": "passed",
+          "title": "renders TemplateManagement"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders CenterManagement",
+          "location": null,
+          "status": "passed",
+          "title": "renders CenterManagement"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders CenterMembers",
+          "location": null,
+          "status": "passed",
+          "title": "renders CenterMembers"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders UserProfilePage",
+          "location": null,
+          "status": "passed",
+          "title": "renders UserProfilePage"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders Admin",
+          "location": null,
+          "status": "passed",
+          "title": "renders Admin"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders AdminHome",
+          "location": null,
+          "status": "passed",
+          "title": "renders AdminHome"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders UserManagement",
+          "location": null,
+          "status": "passed",
+          "title": "renders UserManagement"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders RoleAndPermission",
+          "location": null,
+          "status": "passed",
+          "title": "renders RoleAndPermission"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders UserPermissions",
+          "location": null,
+          "status": "passed",
+          "title": "renders UserPermissions"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders UserPointsManagement",
+          "location": null,
+          "status": "passed",
+          "title": "renders UserPointsManagement"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders RolePermissionEdit",
+          "location": null,
+          "status": "passed",
+          "title": "renders RolePermissionEdit"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders BoardDetail",
+          "location": null,
+          "status": "passed",
+          "title": "renders BoardDetail"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders BoardSettings",
+          "location": null,
+          "status": "passed",
+          "title": "renders BoardSettings"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders BoardMembers",
+          "location": null,
+          "status": "passed",
+          "title": "renders BoardMembers"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders BoardMember",
+          "location": null,
+          "status": "passed",
+          "title": "renders BoardMember"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders BoardSummary",
+          "location": null,
+          "status": "passed",
+          "title": "renders BoardSummary"
+        },
+        {
+          "ancestorTitles": [
+            "Pages smoke render"
+          ],
+          "failureMessages": [],
+          "fullName": "Pages smoke render renders LineChart",
+          "location": null,
+          "status": "passed",
+          "title": "renders LineChart"
+        }
+      ],
+      "endTime": 1761808817154,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\pages.smoke.test.tsx",
+      "startTime": 1761808813596,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "UserContext"
+          ],
+          "failureMessages": [],
+          "fullName": "UserContext uses default avatar when no token is present",
+          "location": null,
+          "status": "passed",
+          "title": "uses default avatar when no token is present"
+        },
+        {
+          "ancestorTitles": [
+            "UserContext"
+          ],
+          "failureMessages": [],
+          "fullName": "UserContext refreshAvatar loads avatar when getMe returns a user id",
+          "location": null,
+          "status": "passed",
+          "title": "refreshAvatar loads avatar when getMe returns a user id"
+        }
+      ],
+      "endTime": 1761808817304,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\UserContext.test.tsx",
+      "startTime": 1761808816767,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "LoadingScreen"
+          ],
+          "failureMessages": [],
+          "fullName": "LoadingScreen renders with default message",
+          "location": null,
+          "status": "passed",
+          "title": "renders with default message"
+        },
+        {
+          "ancestorTitles": [
+            "LoadingScreen"
+          ],
+          "failureMessages": [],
+          "fullName": "LoadingScreen renders with custom message",
+          "location": null,
+          "status": "passed",
+          "title": "renders with custom message"
+        }
+      ],
+      "endTime": 1761808817372,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\LoadingScreen.test.tsx",
+      "startTime": 1761808816934,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "LoginForm"
+          ],
+          "failureMessages": [],
+          "fullName": "LoginForm renders form fields and actions",
+          "location": null,
+          "status": "passed",
+          "title": "renders form fields and actions"
+        }
+      ],
+      "endTime": 1761808817410,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\LoginForm.test.tsx",
+      "startTime": 1761808816583,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "ToastNotification"
+          ],
+          "failureMessages": [],
+          "fullName": "ToastNotification renders message and optional description",
+          "location": null,
+          "status": "passed",
+          "title": "renders message and optional description"
+        },
+        {
+          "ancestorTitles": [
+            "ToastNotification"
+          ],
+          "failureMessages": [],
+          "fullName": "ToastNotification auto-closes after timeout and closes on click",
+          "location": null,
+          "status": "passed",
+          "title": "auto-closes after timeout and closes on click"
+        }
+      ],
+      "endTime": 1761808817425,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\ToastNotification.test.tsx",
+      "startTime": 1761808816852,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "boardApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "boardApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808817518,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.boardApi.test.ts",
+      "startTime": 1761808817203,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "HelpButton"
+          ],
+          "failureMessages": [],
+          "fullName": "HelpButton toggles menu and opens Guide/AI modals",
+          "location": null,
+          "status": "passed",
+          "title": "toggles menu and opens Guide/AI modals"
+        }
+      ],
+      "endTime": 1761808817586,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\HelpButton.test.tsx",
+      "startTime": 1761808816915,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "PageWrapper"
+          ],
+          "failureMessages": [],
+          "fullName": "PageWrapper renders children inside motion.div",
+          "location": null,
+          "status": "passed",
+          "title": "renders children inside motion.div"
+        }
+      ],
+      "endTime": 1761808817722,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\PageWrapper.test.tsx",
+      "startTime": 1761808817369,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "ProtectedRoute"
+          ],
+          "failureMessages": [],
+          "fullName": "ProtectedRoute shows loading state while permissions loading",
+          "location": null,
+          "status": "passed",
+          "title": "shows loading state while permissions loading"
+        },
+        {
+          "ancestorTitles": [
+            "ProtectedRoute"
+          ],
+          "failureMessages": [],
+          "fullName": "ProtectedRoute renders children when has any required permission",
+          "location": null,
+          "status": "passed",
+          "title": "renders children when has any required permission"
+        },
+        {
+          "ancestorTitles": [
+            "ProtectedRoute"
+          ],
+          "failureMessages": [],
+          "fullName": "ProtectedRoute renders children when has all required permissions",
+          "location": null,
+          "status": "passed",
+          "title": "renders children when has all required permissions"
+        },
+        {
+          "ancestorTitles": [
+            "ProtectedRoute"
+          ],
+          "failureMessages": [],
+          "fullName": "ProtectedRoute renders fallback when no permission",
+          "location": null,
+          "status": "passed",
+          "title": "renders fallback when no permission"
+        },
+        {
+          "ancestorTitles": [
+            "ProtectedRoute"
+          ],
+          "failureMessages": [],
+          "fullName": "ProtectedRoute renders custom fallback when provided",
+          "location": null,
+          "status": "passed",
+          "title": "renders custom fallback when provided"
+        }
+      ],
+      "endTime": 1761808817728,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\ProtectedRoute.test.tsx",
+      "startTime": 1761808817166,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "useUrlState"
+          ],
+          "failureMessages": [],
+          "fullName": "useUrlState parses query into state merged with initial",
+          "location": null,
+          "status": "passed",
+          "title": "parses query into state merged with initial"
+        },
+        {
+          "ancestorTitles": [
+            "useUrlState"
+          ],
+          "failureMessages": [],
+          "fullName": "useUrlState setUrlState updates URL via navigate with replace option",
+          "location": null,
+          "status": "passed",
+          "title": "setUrlState updates URL via navigate with replace option"
+        }
+      ],
+      "endTime": 1761808817836,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\useUrlState.test.tsx",
+      "startTime": 1761808817434,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "useDragAndDrop"
+          ],
+          "failureMessages": [],
+          "fullName": "useDragAndDrop tracks drag start and end",
+          "location": null,
+          "status": "passed",
+          "title": "tracks drag start and end"
+        },
+        {
+          "ancestorTitles": [
+            "useDragAndDrop"
+          ],
+          "failureMessages": [],
+          "fullName": "useDragAndDrop calls moveTaskApi on drop and clears state",
+          "location": null,
+          "status": "passed",
+          "title": "calls moveTaskApi on drop and clears state"
+        }
+      ],
+      "endTime": 1761808817918,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\useDragAndDrop.test.tsx",
+      "startTime": 1761808817463,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "CustomToast"
+          ],
+          "failureMessages": [],
+          "fullName": "CustomToast renders title and optional message",
+          "location": null,
+          "status": "passed",
+          "title": "renders title and optional message"
+        },
+        {
+          "ancestorTitles": [
+            "CustomToast"
+          ],
+          "failureMessages": [],
+          "fullName": "CustomToast renders without message",
+          "location": null,
+          "status": "passed",
+          "title": "renders without message"
+        },
+        {
+          "ancestorTitles": [
+            "CustomToast"
+          ],
+          "failureMessages": [],
+          "fullName": "CustomToast helper functions return elements containing title and message",
+          "location": null,
+          "status": "passed",
+          "title": "helper functions return elements containing title and message"
+        }
+      ],
+      "endTime": 1761808817919,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\CustomToast.test.tsx",
+      "startTime": 1761808817450,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "useVietnameseSearch"
+          ],
+          "failureMessages": [],
+          "fullName": "useVietnameseSearch debounces URL update on input change",
+          "location": null,
+          "status": "passed",
+          "title": "debounces URL update on input change"
+        },
+        {
+          "ancestorTitles": [
+            "useVietnameseSearch"
+          ],
+          "failureMessages": [],
+          "fullName": "useVietnameseSearch defers update during IME composition and updates on composition end",
+          "location": null,
+          "status": "passed",
+          "title": "defers update during IME composition and updates on composition end"
+        }
+      ],
+      "endTime": 1761808817933,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\useVietnameseSearch.test.tsx",
+      "startTime": 1761808817538,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "taskApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "taskApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808817987,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.taskApi.test.ts",
+      "startTime": 1761808817764,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "useAuth hook (keycloak)"
+          ],
+          "failureMessages": [],
+          "fullName": "useAuth hook (keycloak) exposes fields and sets/clears tokens on login/logout",
+          "location": null,
+          "status": "passed",
+          "title": "exposes fields and sets/clears tokens on login/logout"
+        }
+      ],
+      "endTime": 1761808818007,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\useAuth.test.tsx",
+      "startTime": 1761808817611,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "commentApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "commentApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818019,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.commentApi.test.ts",
+      "startTime": 1761808817770,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "notificationApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "notificationApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818127,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.notificationApi.test.ts",
+      "startTime": 1761808817857,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "permissionApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "permissionApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818179,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.permissionApi.test.ts",
+      "startTime": 1761808817956,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "fileApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "fileApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818192,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.fileApi.test.ts",
+      "startTime": 1761808817954,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "utils/errorHandler"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/errorHandler returns specific messages by status code",
+          "location": null,
+          "status": "passed",
+          "title": "returns specific messages by status code"
+        },
+        {
+          "ancestorTitles": [
+            "utils/errorHandler"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/errorHandler uses backend message for 400 and generic fallbacks",
+          "location": null,
+          "status": "passed",
+          "title": "uses backend message for 400 and generic fallbacks"
+        },
+        {
+          "ancestorTitles": [
+            "utils/errorHandler"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/errorHandler handles network errors and default message",
+          "location": null,
+          "status": "passed",
+          "title": "handles network errors and default message"
+        },
+        {
+          "ancestorTitles": [
+            "utils/errorHandler"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/errorHandler handleGroupDeleteError maps group-specific errors",
+          "location": null,
+          "status": "passed",
+          "title": "handleGroupDeleteError maps group-specific errors"
+        }
+      ],
+      "endTime": 1761808818234,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\utils.errorHandler.test.ts",
+      "startTime": 1761808817961,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "roleApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "roleApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818272,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.roleApi.test.ts",
+      "startTime": 1761808818028,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "tagApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "tagApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818283,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.tagApi.test.ts",
+      "startTime": 1761808818021,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "groupApi tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "groupApi tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818307,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.groupApi.test.ts",
+      "startTime": 1761808818058,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "utils/vietnamese query helpers"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese query helpers toIso handles undefined, primitives, and Date",
+          "location": null,
+          "status": "passed",
+          "title": "toIso handles undefined, primitives, and Date"
+        },
+        {
+          "ancestorTitles": [
+            "utils/vietnamese query helpers"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese query helpers cleanParams removes empty, null, undefined and converts Dates",
+          "location": null,
+          "status": "passed",
+          "title": "cleanParams removes empty, null, undefined and converts Dates"
+        },
+        {
+          "ancestorTitles": [
+            "utils/vietnamese query helpers"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese query helpers buildQueryString builds from arrays and scalars, skips empties",
+          "location": null,
+          "status": "passed",
+          "title": "buildQueryString builds from arrays and scalars, skips empties"
+        },
+        {
+          "ancestorTitles": [
+            "utils/vietnamese query helpers"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese query helpers parseQuery parses search string to object",
+          "location": null,
+          "status": "passed",
+          "title": "parseQuery parses search string to object"
+        },
+        {
+          "ancestorTitles": [
+            "utils/vietnamese query helpers"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese query helpers serializeQueryParams serializes arrays and scalars and skips empty",
+          "location": null,
+          "status": "passed",
+          "title": "serializeQueryParams serializes arrays and scalars and skips empty"
+        }
+      ],
+      "endTime": 1761808818382,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\utils.querystring.extras.test.ts",
+      "startTime": 1761808818144,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "utils/vietnamese"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese removeVietnameseTones strips diacritics and normalizes đ/Đ",
+          "location": null,
+          "status": "passed",
+          "title": "removeVietnameseTones strips diacritics and normalizes đ/Đ"
+        },
+        {
+          "ancestorTitles": [
+            "utils/vietnamese"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/vietnamese vietnameseIncludes is diacritic-insensitive and case-insensitive",
+          "location": null,
+          "status": "passed",
+          "title": "vietnameseIncludes is diacritic-insensitive and case-insensitive"
+        }
+      ],
+      "endTime": 1761808818410,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\utils.vietnamese.test.ts",
+      "startTime": 1761808818198,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "utils/query"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/query cleanParams removes empty and serializes dates",
+          "location": null,
+          "status": "passed",
+          "title": "cleanParams removes empty and serializes dates"
+        },
+        {
+          "ancestorTitles": [
+            "utils/query"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/query buildQueryString produces prefixed query string",
+          "location": null,
+          "status": "passed",
+          "title": "buildQueryString produces prefixed query string"
+        },
+        {
+          "ancestorTitles": [
+            "utils/query"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/query parseQuery parses string into object",
+          "location": null,
+          "status": "passed",
+          "title": "parseQuery parses string into object"
+        },
+        {
+          "ancestorTitles": [
+            "utils/query"
+          ],
+          "failureMessages": [],
+          "fullName": "utils/query serializeQueryParams builds URLSearchParams ignoring empty",
+          "location": null,
+          "status": "passed",
+          "title": "serializeQueryParams builds URLSearchParams ignoring empty"
+        }
+      ],
+      "endTime": 1761808818424,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\utils.query.test.ts",
+      "startTime": 1761808818209,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "API integration tests removed"
+          ],
+          "failureMessages": [],
+          "fullName": "API integration tests removed skipped",
+          "location": null,
+          "status": "pending",
+          "title": "skipped"
+        }
+      ],
+      "endTime": 1761808818461,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\api.integration.test.ts",
+      "startTime": 1761808818290,
+      "status": "passed",
+      "summary": ""
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            "msw.setup placeholder"
+          ],
+          "failureMessages": [],
+          "fullName": "msw.setup placeholder inactive until integration tests are enabled",
+          "location": null,
+          "status": "pending",
+          "title": "inactive until integration tests are enabled"
+        }
+      ],
+      "endTime": 1761808818684,
+      "message": "",
+      "name": "D:\\KEN\\Gitdesktop\\Half-Baked-Devs-KEN-FE\\src\\__tests__\\msw.setup.ts",
+      "startTime": 1761808818255,
+      "status": "passed",
+      "summary": ""
+    }
+  ],
+  "wasInterrupted": false
+}

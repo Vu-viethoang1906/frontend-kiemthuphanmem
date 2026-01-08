@@ -1,0 +1,643 @@
+/* ============================================
+   ROLE & PERMISSION - MODERN TABLE UI
+   ============================================ */
+
+.rp-container {
+  padding: 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+.rp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.rp-header-left {
+  flex: 1;
+}
+
+.rp-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.rp-subtitle {
+  color: #6c757d;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.rp-btn-create {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.rp-btn-create:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* ============================================
+   TABS & FILTERS
+   ============================================ */
+.rp-tabs-filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.rp-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background: white;
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.rp-tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  color: #6c757d;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.rp-tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+.rp-search-box {
+  position: relative;
+  min-width: 300px;
+}
+
+.rp-search-box svg {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #adb5bd;
+}
+
+.rp-search-input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.rp-search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* ============================================
+   TABLE CONTAINER
+   ============================================ */
+.rp-table-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.rp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rp-table thead {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+.rp-table th {
+  padding: 1.25rem 1.5rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #495057;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.rp-table tbody tr {
+  border-bottom: 1px solid #f1f3f5;
+  transition: all 0.2s ease;
+}
+
+.rp-table tbody tr:hover {
+  background: #f8f9ff;
+}
+
+.rp-table td {
+  padding: 1.25rem 1.5rem;
+  font-size: 0.95rem;
+  color: #495057;
+  vertical-align: middle;
+}
+
+/* ============================================
+   ROLE NAME CELL
+   ============================================ */
+.rp-role-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+/* ============================================
+   PERMISSION COUNT
+   ============================================ */
+.rp-perm-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.75rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   STATUS BADGE
+   ============================================ */
+.rp-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.rp-status-badge.active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.rp-status-badge.inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.rp-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ============================================
+   ACTIONS
+   ============================================ */
+.rp-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rp-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #e9ecef;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #6c757d;
+}
+
+.rp-btn-icon:hover {
+  border-color: #667eea;
+  background: #f8f9ff;
+  color: #667eea;
+}
+
+.rp-btn-icon.delete:hover {
+  border-color: #dc3545;
+  background: #fff5f5;
+  color: #dc3545;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.rp-empty-state {
+  text-align: center;
+  padding: 4rem 2rem !important;
+  color: #adb5bd;
+}
+
+.rp-empty-state svg {
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.rp-empty-state p {
+  font-size: 1rem;
+  margin: 0;
+}
+
+/* ============================================
+   LOADING
+   ============================================ */
+.rp-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4rem 2rem;
+}
+
+.rp-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #f1f3f5;
+  border-top-color: #667eea;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   MODAL
+   ============================================ */
+.rp-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+}
+
+.rp-modal {
+  background: white;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.rp-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.rp-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.rp-modal-close {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.rp-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.rp-modal-body {
+  padding: 2rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.rp-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.rp-form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 0.5rem;
+}
+
+.rp-form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.rp-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+.rp-permissions-section {
+  margin-top: 1.5rem;
+}
+
+.rp-permissions-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.rp-perm-category {
+  margin-bottom: 1.5rem;
+}
+
+.rp-category-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rp-category-header:hover {
+  background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+}
+
+.rp-category-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.rp-category-name {
+  font-weight: 700;
+  color: #495057;
+  font-size: 0.95rem;
+}
+
+.rp-perm-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 0.75rem;
+  padding-left: 2.5rem;
+}
+
+.rp-perm-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.rp-perm-item:hover {
+  background: #f8f9fa;
+}
+
+.rp-perm-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+.rp-perm-code {
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+.rp-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 2px solid #f1f3f5;
+  background: #f8f9fa;
+}
+
+.rp-btn-secondary {
+  padding: 0.875rem 1.5rem;
+  border: 2px solid #e9ecef;
+  background: white;
+  color: #495057;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rp-btn-secondary:hover {
+  border-color: #adb5bd;
+  background: #f8f9fa;
+}
+
+.rp-btn-primary {
+  padding: 0.875rem 1.5rem;
+  border: none;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rp-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.rp-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ============================================
+   MATRIX VIEW
+   ============================================ */
+.rp-matrix-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  width: 100%;
+}
+
+.rp-matrix-grid {
+  display: grid;
+  width: 100%;
+}
+
+.rp-matrix-header {
+  display: contents;
+}
+
+.rp-matrix-cell {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #f1f3f5;
+  border-right: 1px solid #f1f3f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rp-matrix-cell.header {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-weight: 700;
+  color: #495057;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.rp-matrix-cell.category {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  font-weight: 700;
+  color: #4338ca;
+  justify-content: flex-start;
+  padding-left: 1.5rem;
+}
+
+.rp-matrix-cell.permission {
+  justify-content: flex-start;
+  padding-left: 2rem;
+  font-size: 0.875rem;
+  color: #495057;
+}
+
+.rp-matrix-checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: #667eea;
+  cursor: pointer;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  .rp-perm-list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .rp-container {
+    padding: 1rem;
+  }
+
+  .rp-title {
+    font-size: 1.5rem;
+  }
+
+  .rp-tabs-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rp-search-box {
+    min-width: 100%;
+  }
+
+  .rp-table-container {
+    overflow-x: auto;
+  }
+
+  .rp-table {
+    min-width: 600px;
+  }
+
+  .rp-modal {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+
+  .rp-perm-list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,55 @@
+.codegym-login-container {
+  background: url("https://blog.spacematrix.com/sites/default/files/styles/resp_large_breakpoints_theme_archi_dark_wide_1x/public/pantone_linkedin_cover.jpg") no-repeat center center/cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  width: 380px;
+  text-align: center;
+}
+
+.logo {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  background: #003985;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn-login:hover {
+  background: #00285f;
+}
+
+.btn-back {
+  margin-top: 15px;
+  background: none;
+  border: none;
+  color: #003985;
+  font-size: 14px;
+  cursor: pointer;
+}

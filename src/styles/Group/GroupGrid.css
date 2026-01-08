@@ -1,0 +1,54 @@
+/* GroupGrid Component Styles - Extracted from group.css */
+
+.groups-board {
+  background: transparent;
+}
+
+.group-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 1200px) {
+  .group-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .group-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.group-grid.list {
+  display: block;
+}
+
+.group-grid.list .group-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.group-grid.list .group-card-header {
+  flex: 1;
+  margin: 0;
+}
+
+.group-grid.list .group-desc {
+  margin: 0;
+}
+
+.group-grid.list .meta-row {
+  margin-left: auto;
+}
+
+.empty {
+  color: black;
+  padding: 16px;
+  text-align: center;
+}

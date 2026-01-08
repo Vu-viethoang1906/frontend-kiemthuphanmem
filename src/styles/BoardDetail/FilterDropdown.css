@@ -1,0 +1,132 @@
+.filter-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 280px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 9999 !important;
+}
+
+.filter-header {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-search {
+    padding: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.filter-search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-search-input:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.filter-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.btn-clear-all {
+    padding: 4px 8px;
+    background: transparent;
+    border: none;
+    color: #1976d2;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.btn-clear-all:hover {
+    color: #1565c0;
+}
+
+.filter-empty {
+    padding: 20px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 13px;
+}
+
+.filter-tags-list {
+    padding: 8px;
+}
+
+.filter-tag-item {
+    padding: 10px 12px;
+    margin: 4px 0;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    border: 1px solid #e9ecef;
+    transition: all 0.2s;
+}
+
+.filter-tag-item:hover {
+    background: #f8f9fa;
+}
+
+.filter-tag-item.selected {
+    background: #e3f2fd;
+    border-color: #1976d2;
+}
+
+.filter-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    border: 2px solid #dadce0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.filter-tag-item.selected .filter-checkbox {
+    border-color: #1976d2;
+    background: #1976d2;
+}
+
+.checkbox-check {
+    color: white;
+    font-size: 12px;
+}
+
+.filter-tag-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.filter-tag-name {
+    font-size: 13px;
+    color: #2c3e50;
+    flex: 1;
+}

@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  --bg-body: #f8fafc;
+  --surface-card: #ffffff;
+  --surface-muted: #f1f5f9;
+  --surface-elevated: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --border-color: #e2e8f0;
+  --muted-border: #cbd5f5;
+  --accent-color: #6366f1;
+  --accent-color-strong: #4f46e5;
+  --shadow-color: rgba(15, 23, 42, 0.08);
+  --accent-soft: rgba(99, 102, 241, 0.08);
+  --info-soft: rgba(14, 165, 233, 0.12);
+  --success-badge-bg: rgba(16, 185, 129, 0.12);
+  --success-badge-color: #059669;
+  --muted-badge-bg: rgba(148, 163, 184, 0.16);
+  --muted-badge-color: #94a3b8;
+  --settings-hero-bg: linear-gradient(90deg,#258be7 0%,#1976d2 100%);
+  --settings-hero-color: #ffffff;
+  --tab-active-bg: #eef2ff;
+  --tab-active-color: #4f46e5;
+  --tab-inactive-color: #64748b;
+  --input-bg: #ffffff;
+  --input-border: #cbd5f5;
+  --input-text: #0f172a;
+}
+
+html.dark {
+  color-scheme: dark;
+  --bg-body: #020617;
+  --surface-card: #0f172a;
+  --surface-muted: #0b1120;
+  --surface-elevated: #111827;
+  --text-primary: #e5e7eb;
+  --text-secondary: #94a3b8;
+  --border-color: #1f2937;
+  --muted-border: #334155;
+  --accent-color: #818cf8;
+  --accent-color-strong: #a5b4fc;
+  --shadow-color: rgba(2, 6, 23, 0.7);
+  --accent-soft: rgba(129, 140, 248, 0.18);
+  --info-soft: rgba(14, 165, 233, 0.2);
+  --success-badge-bg: rgba(34, 197, 94, 0.25);
+  --success-badge-color: #4ade80;
+  --muted-badge-bg: rgba(71, 85, 105, 0.5);
+  --muted-badge-color: #cbd5f5;
+  --settings-hero-bg: linear-gradient(90deg,#0b173d 0%,#1e1b4b 100%);
+  --settings-hero-color: #e0e7ff;
+  --tab-active-bg: rgba(99, 102, 241, 0.18);
+  --tab-active-color: #c7d2fe;
+  --tab-inactive-color: #94a3b8;
+  --input-bg: #0f172a;
+  --input-border: #1f2937;
+  --input-text: #e5e7eb;
+}
+
+html, body { height: 100%; }
+/* Hide page scrollbars but keep scrolling */
+html, body, #root {
+  -ms-overflow-style: none !important;       /* IE/Edge Legacy */
+  scrollbar-width: none !important;          /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar, #root::-webkit-scrollbar { width: 0 !important; height: 0 !important; display: none !important; }
+
+* {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#root {
+  background-color: var(--bg-body);
+}
+
+/* General surfaces */
+.app-surface {
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.app-surface-muted {
+  background-color: var(--surface-muted);
+  color: var(--text-secondary);
+}
+
+.app-border {
+  border-color: var(--border-color);
+}
+
+/* Tailwind utility overrides so existing classes adapt automatically */
+html.dark body {
+  background-color: var(--bg-body);
+  color: var(--text-primary);
+}
+
+html.dark .bg-white {
+  background-color: var(--surface-card) !important;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-slate-50 {
+  background-color: var(--surface-muted) !important;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700,
+html.dark .text-gray-600,
+html.dark .text-gray-500 {
+  color: var(--text-primary) !important;
+}
+
+html.dark .text-gray-400,
+html.dark .text-gray-300 {
+  color: var(--text-secondary) !important;
+}
+
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-300 {
+  border-color: var(--border-color) !important;
+}
+
+html.dark .hover\:bg-gray-50:hover,
+html.dark .hover\:bg-gray-100:hover,
+html.dark .hover\:bg-white:hover {
+  background-color: #1f2937 !important;
+}
+
+html.dark .hover\:text-gray-700:hover,
+html.dark .hover\:text-gray-600:hover {
+  color: var(--text-primary) !important;
+}
+
+html.dark .shadow,
+html.dark .shadow-md,
+html.dark .shadow-lg {
+  box-shadow: 0 10px 25px -12px var(--shadow-color), 0 8px 16px -6px var(--shadow-color) !important;
+}
+
+/* ===== THEME: DARK MODE BASIC OVERRIDES ===== */
+html.dark .login-page,
+html.dark .codegym-login-container {
+  background: radial-gradient(circle at top, #1e293b 0%, #020617 55%, #020617 100%);
+}
+
+html.dark .login-box,
+html.dark .wrapper {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

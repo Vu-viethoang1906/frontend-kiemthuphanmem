@@ -1,0 +1,91 @@
+/* GroupHeader Component Styles - Extracted from group.css */
+
+/* Header Section */
+.groups-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #000000;
+}
+
+.groups-header-left {
+  flex: 1;
+}
+
+.groups-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #000000;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.groups-title svg {
+  color: #000000;
+  width: 32px;
+  height: 32px;
+}
+
+.groups-sub {
+  font-size: 0.8125rem;
+  color: #666666;
+  margin: 8px 0 0 0;
+  font-weight: 500;
+}
+
+.count-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+  padding: 0 8px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0;
+}
+
+/* Search Filter */
+.groups-filter {
+  position: relative;
+  max-width: 500px;
+  margin-bottom: 24px;
+}
+
+.groups-filter .search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666666;
+  pointer-events: none;
+}
+
+.groups-filter input {
+  width: 100%;
+  padding: 12px 16px 12px 48px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 0;
+  font-size: 0.875rem;
+  color: #000000;
+  transition: all 0.15s;
+}
+
+.groups-filter input:focus {
+  outline: none;
+  border-color: #000000;
+  background: #ffffff;
+}
+
+.groups-filter input::placeholder {
+  color: #999999;
+}

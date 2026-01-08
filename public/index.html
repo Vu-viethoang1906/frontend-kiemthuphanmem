@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/icons/ken.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Ken - Project Management Application"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/icons/ken.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>Ken</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- Minimal runtime error overlay so production pages show errors instead of a white screen -->
+    <script>
+      (function () {
+        function showError(title, detail) {
+          try {
+            var el = document.getElementById('runtime-error-overlay');
+            if (!el) {
+              el = document.createElement('div');
+              el.id = 'runtime-error-overlay';
+              el.style.position = 'fixed';
+              el.style.left = '0';
+              el.style.top = '0';
+              el.style.right = '0';
+              el.style.bottom = '0';
+              el.style.background = 'rgba(0,0,0,0.85)';
+              el.style.color = '#fff';
+              el.style.zIndex = '9999999';
+              el.style.padding = '24px';
+              el.style.overflow = 'auto';
+              el.style.fontFamily = 'monospace';
+              el.innerHTML = '<h2 style="color:#ff6b6b">Application error</h2>' +
+                '<div id="runtime-error-details" style="white-space:pre-wrap;margin-top:12px"></div>' +
+                '<div style="margin-top:12px;color:#ddd">Open the browser console to inspect deeper or contact support.</div>';
+              document.body.appendChild(el);
+            }
+            var details = document.getElementById('runtime-error-details');
+            if (details) details.textContent = title + '\n\n' + (detail || '');
+          } catch (e) {
+            /* no-op */
+          }
+        }
+
+        window.addEventListener('error', function (e) {
+          showError(e.message || 'Script error', e.error && e.error.stack);
+        });
+        window.addEventListener('unhandledrejection', function (e) {
+          var reason = e && e.reason ? (e.reason.message || JSON.stringify(e.reason)) : 'Unhandled rejection';
+          showError('Unhandled promise rejection', reason);
+        });
+      })();
+    </script>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

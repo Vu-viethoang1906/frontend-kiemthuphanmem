@@ -1,0 +1,4 @@
+#!/bin/sh
+# Run the Node helper to execute lint-staged. This avoids the shell parsing JS directly.
+node "$(dirname "$0")/pre-commit.js"
+exit $?

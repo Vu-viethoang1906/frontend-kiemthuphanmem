@@ -1,0 +1,23 @@
+# ======= Test Stage =======
+FROM node:18-alpine AS test
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies (bao gồm devDependencies)
+COPY package*.json ./
+
+# Use npm default registry to ensure required package versions are available
+RUN npm config set registry https://registry.npmmirror.com/
+
+# Cài tất cả dependencies (không omit dev)
+RUN npm install
+
+# Copy toàn bộ mã nguồn vào container
+COPY . .
+
+# Biến môi trường nếu cần
+ENV CI=true
+
+# Chạy lệnh test CI để xuất coverage & junit
+CMD ["npm", "run", "test:ci"]

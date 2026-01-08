@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  react-app-test:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: react-test
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000/api
+      - REACT_APP_SOCKET_URL=http://localhost:3005/api
+      - REACT_APP_MODE=test
+      # Groq API key should come from environment, do NOT hard-code real key here
+      - REACT_APP_GROQ_API_KEY=${REACT_APP_GROQ_API_KEY}
+      - REACT_APP_SOCKET=http://localhost:3005
+
+    tty: true
+    stdin_open: true
+    # Giới hạn bộ nhớ để tránh bị kill do hết RAM
+    mem_limit: 4g
+    volumes:
+      - ./coverage:/app/coverage
+      - ./reports:/app/reports

@@ -1,0 +1,281 @@
+.tag-manager-modal {
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: white;
+    width: 90%;
+}
+.modal-overlay334 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+}
+.create-tag-section {
+    margin-bottom: 24px;
+    padding: 16px;
+    background: #f8f9fa;
+    border: 1px solid #e4e4e4;
+    
+}
+.modal99 {
+    border-bottom: #a8a8a8;
+    border-bottom: 1px solid #e8eaed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+}
+.modal-header99 {
+   display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    
+    padding: 10px;
+}
+.modal-header99 h3{
+    
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #505050;
+}
+
+.create-tag-section h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.create-tag-form {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+}
+
+.tag-input-group {
+    flex: 1;
+}
+
+.tag-input-group label,
+.tag-color-group label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: #5f6368;
+    font-weight: 500;
+}
+
+.tag-input-group .form-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.color-input {
+    width: 50px;
+    height: 36px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-create-tag {
+    padding: 8px 16px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+}
+
+.btn-create-tag:hover:not(:disabled) {
+    background: #1765cc;
+}
+
+.btn-create-tag:disabled {
+    background: #dadce0;
+    cursor: not-allowed;
+}
+
+.tags-list-section h4 {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.empty-tags {
+    padding: 20px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 13px;
+}
+
+.tags-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+}
+.modal-footer444 {
+   
+    padding: 10px;
+    background: white;
+    border-top: 1px solid #e8eaed;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+    
+    width: 100%;
+}
+.tag-list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.tag-edit-input {
+    flex: 1;
+    padding: 6px 8px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.tag-edit-color {
+    width: 40px;
+    height: 32px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-save-tag {
+    padding: 6px 12px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-save-tag:hover {
+    background: #218838;
+}
+
+.btn-cancel-tag {
+    padding: 6px 12px;
+    background: #525252;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-cancel-tag:hover {
+    background: #3d3d3d;
+}
+
+.tag-color-preview {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.tag-list-name {
+    flex: 1;
+    font-size: 14px;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.btn-edit-tag {
+    padding: 6px 12px;
+    background: #f8f9fa;
+    color: #5f6368;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-edit-tag:hover {
+    background: #e9ecef;
+}
+
+.btn-delete-tag {
+    padding: 6px 12px;
+    background: #fff;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete-tag:hover {
+    background: #dc3545;
+    color: white;
+}
+.btn-close12 {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #95a5a6;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.btn-close12:hover {
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+.btn-close12-modal {
+    padding: 9px 24px;
+    background: #474747;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-close12-modal:hover {
+    background: #333333;
+}

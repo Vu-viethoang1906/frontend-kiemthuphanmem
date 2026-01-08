@@ -1,0 +1,79 @@
+[33m6157c1a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mnhat[m[33m)[m Merge branch 'gianghoangkimcot' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE into nhat
+[33mffaeb49[m[33m ([m[1;31morigin/gianghoangkimcot[m[33m)[m update help
+[33m4376687[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m merge nhánh đô
+[33m50aea15[m thêm phần giao nhiệm vụ cho thành viên
+[33m4350d61[m Merge branch 'gianghoangkimcot' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE
+[33maebf6eb[m hiển thị ảnh trong board member
+[33m2d6724b[m merge full 1
+[33mbfe1f2e[m[33m ([m[1;31morigin/gianghoangkimcode[m[33m)[m REPO FULL
+[33m3debf46[m full mergee
+[33m8b7fec9[m MERGE FULL
+[33mb551106[m update U1
+[33m014a949[m merge 19/20
+[33mdc8bc50[m Giữ toàn bộ thay đổi của nhánh nhatcu
+[33mf8db020[m merge nhat giang
+[33mea0225e[m Upadte UI project
+[33m4d57a0b[m xem bảng trong group và chống 401
+[33me7a91b0[m update CENTER Role member board
+[33m487ee6e[m add view center
+[33m6928d0d[m Merge branch 'main' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE
+[33mc99c1a1[m update ủl
+[33ma235d4b[m Merge branch 'main' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE
+[33mda99821[m[33m ([m[1;31morigin/nhatcu[m[33m, [m[1;32mnhatcu[m[33m)[m tải board
+[33mdaa1f4f[m update ủl
+[33me31f273[m sửa giao diện
+[33mb91c8d4[m add truoc sửa giao diện
+[33mc794e9c[m Update UI
+[33mcd0135a[m Merge branch 'main' into nhatcu
+[33m4d89b93[m ad trước khi merge
+[33m58bc598[m 'a'
+[33md46acd0[m fix giao diện người dùng
+[33md045f72[m upadate tags
+[33m84e5422[m update board tags
+[33m15f29f6[m fig trang usermanager
+[33me0720cf[m kéo thả
+[33m60775ab[m Merge branch 'hoang'
+[33meb97a5a[m[33m ([m[1;31morigin/hoang[m[33m, [m[1;32mhoang[m[33m)[m feat: Enhanced task edit modal and role permission management
+[33m64d08cf[m import task
+[33m0215bbf[m Merge branch 'main' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE
+[33me2c3534[m update group project u1
+[33mb6863a7[m img
+[33m53a1121[m nhất fig lỗi cơ bản
+[33m35a047f[m feat: Redesign RoleAndPermission UI and add Deleted Users tab
+[33mae58edc[m edit role And permisson
+[33m13093b9[m fix role and permission
+[33m8b37735[m Merge branch 'main' of https://github.com/codegym-software/Half-Baked-Devs-KEN-FE
+[33ma069b2d[m start sprint 4
+[33ma53821c[m feat(role-permission): redesign UI with tabs, role modal with permission tree, permission matrix; fix ESLint confirm rule; minor UI updates
+[33m73e7b0c[m quản trị hệ thống
+[33m8c99d1d[m a
+[33mfaa5144[m update board tas4 template
+[33mde47ed1[m merge nhanh giang
+[33m25beaa1[m[33m ([m[1;31morigin/giang[m[33m, [m[1;32mgiang[m[33m)[m nhanh new
+[33m6d131aa[m Merge branch 'nhat' A the commit.
+[33m90e8c80[m merge nhanh
+[33m4b223d1[m gán roter về group
+[33m19e3bfb[m quản lí role permission xong
+[33md1f788f[m update ui board và board detail
+[33m7ddea0f[m quản lí permisson
+[33m3587eec[m Resolve merge conflict: giữ file từ main
+[33m1f8f549[m Lưu thay đổi trước khi pull
+[33m23221cd[m Add UserPermissions page with new permission system
+[33m28c4861[m Update group.css
+[33m25efffd[m Update group.css
+[33m57aa0e9[m Update Groups.tsx
+[33m0bb4010[m Update projects.css
+[33mca1a0bb[m Update projects-view.css
+[33md2f666b[m Update Projects.tsx
+[33mbb1cab7[m new add member
+[33m0bd40b0[m update UI group project, group, color
+[33mf2538e6[m MERGE CODE
+[33m323c594[m fix profile
+[33m7cbc8ab[m fix update profile
+[33m0eb0278[m Add files via upload
+[33m9192b07[m fix edit
+[33mcdc0c1e[m fix edit
+[33mdf49980[m Update board template
+[33me7e38ac[m crud userkeycloack
+[33m2b6175f[m login email
+[33mbfc8601[m update group profile Get USER

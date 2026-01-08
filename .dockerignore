@@ -1,0 +1,40 @@
+# Node modules and logs
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Testing and coverage artifacts
+coverage
+reports
+test_output*.txt
+full_test.txt
+
+# Cypress artifacts
+cypress/videos
+cypress/screenshots
+
+# Git and editor metadata
+.git
+.gitignore
+.vscode
+.DS_Store
+
+# Docker and build outputs
+build
+dist
+
+# Local env and credentials
+.env
+.env.local
+.env.*.local
+
+# Misc
+coverage/
+reports/
+*.log
+*.tmp
+*.cache
+
+# Ignore local IDE config and OS files
+.idea
+Thumbs.db

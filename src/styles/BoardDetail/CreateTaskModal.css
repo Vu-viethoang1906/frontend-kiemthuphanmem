@@ -1,0 +1,300 @@
+/* CreateTaskModal.css */
+
+/* Reset box-sizing cho modal */
+.create-task-modal,
+.create-task-modal *,
+.app-modal,
+.app-modal * {
+    box-sizing: border-box !important;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+}
+
+.create-task-modal,
+.app-modal {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.modal-header77,
+.app-modal__header {
+    border-bottom: #a8a8a8;
+    border-bottom: 1px solid #e8eaed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+}
+
+.modal-header h3,
+.app-modal__header h3 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.modal-body77,
+.app-modal__body {
+    padding: 10px;
+    
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1;
+    max-height: calc(90vh - 140px);
+}
+
+/* Scrollbar styling */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+
+.modal-footer7,
+.app-modal__footer {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    right: auto !important;
+    padding: 10px;
+    border-top: 1px solid #e8eaed;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 0 0 8px 8px;
+    width: 100%;
+}
+
+/* Buttons */
+.ctm-btn-close {
+    background: transparent;
+    border: none;
+    color: #95a5a6;
+    font-size: 22px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.ctm-btn-close:hover {
+    background: #f5f6f7;
+    color: #2c3e50;
+}
+
+.ctm-btn-cancel {
+    padding: 9px 20px;
+    border-radius: 4px;
+    border: 1px solid #dadce0;
+    background: white;
+    color: #5f6368;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.ctm-btn-cancel:hover {
+    background: #f8f9fa;
+}
+
+.ctm-btn-create {
+    padding: 9px 24px;
+    border-radius: 4px;
+    border: none;
+    background: #1a73e8;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.ctm-btn-create:hover {
+    background: #1765cc;
+}
+
+.ctm-btn-create:disabled {
+    background: #dadce0;
+    cursor: not-allowed;
+}
+
+/* Form Elements */
+.ctm-form-group {
+    margin-bottom: 14px;
+    margin-right: 12px;
+}
+
+.ctm-form-group label {
+    display: block;
+    width: 100%;
+}
+
+.ctm-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    
+}
+
+.ctm-label-text {
+    display: block;
+    margin-bottom: 6px;
+    color: #5f6368;
+    font-size: 12px;
+    font-weight: 500;
+    min-height: 18px;
+    line-height: 18px;
+}
+
+.ctm-required {
+    color: #ea4335;
+}
+
+.ctm-form-input,
+.ctm-form-select,
+.ctm-form-textarea {
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid #6e6e6e;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-size: 13px;
+    background: white;
+    transition: border 0.2s;
+    box-sizing: border-box !important;
+    height: 38px;
+}
+
+.ctm-form-textarea {
+    height: auto;
+    min-height: 45px;
+}
+
+.ctm-form-input:focus,
+.ctm-form-select:focus,
+.ctm-form-textarea:focus {
+    outline: none;
+    border-color: #000000;
+    box-shadow: 0 0 0 1px #000000;
+}
+
+.ctm-form-textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+.ctm-form-select {
+    cursor: pointer;
+}
+
+/* Tags */
+.tags-list {
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+    background: #fafbfc;
+    margin-top: 8px;
+}
+
+.tags-list-header {
+    padding: 6px 10px;
+    background: #f0f0f0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #5f6368;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tags-empty {
+    padding: 16px;
+    text-align: center;
+    color: #95a5a6;
+    font-size: 12px;
+}
+
+.tag-item {
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    background: white;
+    transition: background 0.15s;
+}
+
+.tag-item:hover {
+    background: #f8f9fa;
+}
+
+.tag-item.selected {
+    background: #e3f2fd;
+}
+
+.tag-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.tag-name {
+    font-size: 13px;
+    color: #2c3e50;
+    flex: 1;
+}
+
+.tag-check {
+    color: #1a73e8;
+    font-size: 14px;
+}
+
+.tag-hint {
+    font-size: 11px;
+    color: #95a5a6;
+    margin-top: 6px;
+    font-style: italic;
+}

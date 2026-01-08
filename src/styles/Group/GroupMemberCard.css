@@ -1,0 +1,97 @@
+/* GroupMemberCard Component Styles - Extracted from group.css */
+
+.member-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 20px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+}
+
+.member-card:hover {
+  border-color: #000000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.member-card.updating {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(31, 90, 166, 0.15);
+  border-color: #b3d8ff;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.member-avatar-wrapper {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.member-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #f0f0f0;
+}
+
+.member-avatar-placeholder {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  border: 3px solid #f0f0f0;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+}
+
+.member-name {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-align: center;
+  color: #1a1a1a;
+  line-height: 1.4;
+}
+
+/* Role badges */
+.role-badge {
+  margin-top: 10px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 12px;
+  text-transform: capitalize;
+  letter-spacing: 0.3px;
+}
+
+.role-badge.creator {
+  background: #000000;
+  color: #ffffff;
+}
+
+.role-badge.admin {
+  background: #f0f0f0;
+  color: #1a1a1a;
+}
+
+.role-badge.viewer {
+  background: #f8f8f8;
+  color: #666666;
+}
+
+/* Utility hidden class */
+.hidden {
+  display: none !important;
+}

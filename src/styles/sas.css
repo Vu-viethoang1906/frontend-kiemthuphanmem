@@ -1,0 +1,7 @@
+.sas{
+      white-space: nowrap;       
+      overflow: hidden;          /* Ẩn phần tràn ra */
+      text-overflow: ellipsis;   /* Thêm dấu ... */
+      color: black;
+      
+}

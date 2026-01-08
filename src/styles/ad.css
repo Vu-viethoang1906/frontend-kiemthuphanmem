@@ -1,0 +1,28 @@
+body{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+.app-title {
+  display: flex;
+        /* căn giữa theo chiều dọc */
+  gap: 12px;                /* khoảng cách giữa logo và text */
+      /* padding xung quanh */
+  background-color: #fff;   /* nền trắng, có thể đổi màu */
+  border-bottom: 1px solid #e0e0e0; /* viền dưới nhẹ */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.app-title img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border: 2px solid #ccc; /* tùy chọn: viền nhẹ cho nổi bật */
+}
