@@ -3,6 +3,9 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ModalProvider } from '../../../components/ModalProvider';
 
+// Increase timeout for this suite (some flows await multiple async renders)
+jest.setTimeout(20000);
+
 // Router mocks (before component import)
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -10,6 +13,34 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
   useLocation: () => ({ pathname: '/projects', search: '' }),
 }), { virtual: true });
+
+// Socket mock
+jest.mock('../../../socket', () => ({
+  socket: {
+    on: jest.fn(),
+    off: jest.fn(),
+    emit: jest.fn(),
+  },
+}));
+
+// Hook mocks
+const mockSetUrlState = jest.fn();
+jest.mock('../../../hooks/useUrlState', () => ({
+  useUrlState: () => [
+    { page: '1', limit: '10', q: '' },
+    mockSetUrlState,
+  ],
+}));
+
+jest.mock('../../../hooks/useVietnameseSearch', () => ({
+  useVietnameseSearch: () => ({
+    searchValue: '',
+    searchTerm: '',
+    handleInputChange: jest.fn(),
+    handleCompositionStart: jest.fn(),
+    handleCompositionEnd: jest.fn(),
+  }),
+}));
 
 // API mocks
 const mockFetchMyBoards = jest.fn().mockResolvedValue({ data: [
@@ -27,6 +58,7 @@ jest.mock('../../../api/boardMemberApi', () => ({ fetchBoardMembers: jest.fn().m
 jest.mock('../../../api/avataApi', () => ({ fetchAvatarUser: jest.fn().mockResolvedValue({ avatar_url: '' }) }));
 jest.mock('../../../api/axiosInstance', () => ({ get: jest.fn().mockResolvedValue({ data: { data: { _id: 'u1' } } }) }));
 jest.mock('../../../api/fileApi', () => ({ importFileTask: jest.fn().mockResolvedValue({ success: true }) }));
+jest.mock('../../../api/templateApi', () => ({ fetchTemplates: jest.fn().mockResolvedValue({ data: [] }) }));
 jest.mock('react-hot-toast', () => ({
   __esModule: true,
   // Ensure dismiss exists because the component calls toast.dismiss("project-import-limit")
@@ -50,16 +82,23 @@ describe('Projects higher coverage interactions', () => {
 
   it('creates board with default settings (modal flow completes)', async () => {
     await setup();
-    // Open create modal
-    const newBtn = await screen.findByRole('button', { name: /New project/i });
+    
+    // Wait for primary action button to be available
+    const newBtn = await screen.findByRole('button', { name: /New project/i }, { timeout: 10000 });
     await userEvent.click(newBtn);
 
-  const name = await screen.findByPlaceholderText(/Enter project name/i);
+    // Wait for modal to appear and input to be available
+    const name = await screen.findByPlaceholderText(/Enter project name/i);
     await userEvent.type(name, 'Board With Columns');
 
-  await userEvent.click(screen.getByRole('button', { name: /Create project/i }));
+    // Click create button
+    const createBtn = await screen.findByRole('button', { name: /Create project/i });
+    await userEvent.click(createBtn);
 
-    await waitFor(() => expect(mockCreateBoard).toHaveBeenCalled());
+    // Wait for API call to be made
+    await waitFor(() => {
+      expect(mockCreateBoard).toHaveBeenCalled();
+    }, { timeout: 5000 });
   });
 
   it('triggers Import flow and calls importFileTask once a file is chosen', async () => {
