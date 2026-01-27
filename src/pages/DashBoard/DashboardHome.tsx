@@ -401,7 +401,7 @@ const DashboardHome: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-[calc(100vh-60px)] bg-gradient-to-br from-blue-50 via-sky-50 to-blue-100 px-6 py-8">
+      <div className="min-h-[calc(100vh-60px)] bg-white px-6 py-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 rounded-full bg-white/70 px-3 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-200/70 backdrop-blur">
@@ -419,7 +419,7 @@ const DashboardHome: React.FC = () => {
             {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className="relative overflow-hidden rounded-2xl p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur animate-pulse"
+                className="relative overflow-hidden rounded-none p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur animate-pulse"
               >
                 <div className="h-4 w-24 bg-blue-200/60 rounded mb-4" />
                 <div className="h-8 w-16 bg-blue-200/60 rounded mb-2" />
@@ -436,7 +436,7 @@ const DashboardHome: React.FC = () => {
             {Array.from({ length: 2 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-white/90 backdrop-blur rounded-2xl p-6 shadow-sm ring-1 ring-blue-200/60 animate-pulse"
+                className="bg-white/90 backdrop-blur rounded-none p-6 shadow-sm ring-1 ring-blue-200/60 animate-pulse"
               >
                 <div className="h-6 w-48 bg-blue-200/60 rounded mb-6" />
                 <div className="space-y-4">
@@ -453,14 +453,8 @@ const DashboardHome: React.FC = () => {
   }
 
   return (
-    <div className="min-h-[calc(100vh-60px)] bg-gradient-to-br from-sky-50 via-blue-100 to-cyan-100 px-4 sm:px-6 py-6">
+    <div className="min-h-[calc(100vh-60px)] bg-white px-4 sm:px-6 py-6">
       <div className="max-w-7xl mx-auto">
-        {/* Decorative gradient blobs */}
-        <div className="pointer-events-none fixed -top-16 -right-16 h-64 w-64 rounded-full bg-gradient-to-br from-sky-200/70 via-blue-200/50 to-blue-300/40 blur-2xl motion-safe:animate-pulse" />
-        <div className="pointer-events-none fixed -bottom-24 -left-24 h-72 w-72 rounded-full bg-gradient-to-br from-cyan-300/40 via-sky-200/50 to-blue-100/60 blur-3xl motion-safe:animate-pulse" />
-        <div className="pointer-events-none fixed top-1/3 -left-10 h-40 w-40 rounded-full bg-gradient-to-tr from-blue-200/50 to-cyan-200/40 blur-2xl" />
-        <div className="pointer-events-none fixed bottom-10 right-8 h-32 w-32 rounded-full bg-gradient-to-tr from-sky-200/60 to-blue-300/40 blur-2xl" />
-
         {/* Welcome Section */}
         <div className="relative mb-8">
           <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight bg-gradient-to-r from-blue-900 via-sky-800 to-cyan-700 bg-clip-text text-transparent">
@@ -483,7 +477,7 @@ const DashboardHome: React.FC = () => {
                   }`,
                 )
               }
-              className="relative overflow-hidden rounded-2xl p-5 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group"
+              className="relative overflow-hidden rounded-none p-5 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group"
             >
               <div className="absolute right-4 top-4 w-10 h-10 text-2xl text-blue-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
                 📈
@@ -507,7 +501,7 @@ const DashboardHome: React.FC = () => {
                   }`,
                 )
               }
-              className="relative overflow-hidden rounded-2xl p-5 text-left shadow-lg shadow-emerald-200/60 ring-1 ring-emerald-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-300/80 hover:ring-emerald-400 transition-all duration-300 group"
+              className="relative overflow-hidden rounded-none p-5 text-left shadow-lg shadow-emerald-200/60 ring-1 ring-emerald-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-300/80 hover:ring-emerald-400 transition-all duration-300 group"
             >
               <div className="absolute right-4 top-4 w-10 h-10 text-2xl text-emerald-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
                 ✅
@@ -536,7 +530,7 @@ const DashboardHome: React.FC = () => {
                   }`,
                 )
               }
-              className="relative overflow-hidden rounded-2xl p-5 text-left shadow-lg shadow-red-200/60 ring-1 ring-red-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-300/80 hover:ring-red-400 transition-all duration-300 group"
+              className="relative overflow-hidden rounded-none p-5 text-left shadow-lg shadow-red-200/60 ring-1 ring-red-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-300/80 hover:ring-red-400 transition-all duration-300 group"
             >
               <div className="absolute right-4 top-4 w-10 h-10 text-2xl text-red-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
                 ⚠️
@@ -556,7 +550,7 @@ const DashboardHome: React.FC = () => {
         <div className="grid gap-4 sm:gap-5 mb-6 sm:mb-8 grid-cols-2 lg:grid-cols-4">
           {/* Total Projects Card */}
           <button
-            className="relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group"
+            className="relative overflow-hidden rounded-none p-4 sm:p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group"
             onClick={() => navigate('/dashboard/projects')}
           >
             <div className="absolute right-4 top-4 w-9 h-9 text-2xl text-blue-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
@@ -581,7 +575,7 @@ const DashboardHome: React.FC = () => {
             onClick={() => navigate(`/user/logUser`)}
             className="
     group 
-    relative overflow-hidden rounded-2xl p-6 text-left shadow-lg shadow-blue-200/60 
+    relative overflow-hidden rounded-none p-6 text-left shadow-lg shadow-blue-200/60 
     ring-1 ring-blue-300/70 bg-white/80 backdrop-blur 
     transition-all duration-300 cursor-pointer
     hover:shadow-blue-300 hover:-translate-y-1 hover:scale-[1.02]
@@ -630,7 +624,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Total Tasks Card */}
-          <div className="relative overflow-hidden rounded-2xl p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group">
+          <div className="relative overflow-hidden rounded-none p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group">
             <div className="absolute right-4 top-4 w-9 h-9 text-2xl text-emerald-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
               ✅
             </div>
@@ -647,7 +641,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Team Members Card */}
-          <div className="relative overflow-hidden rounded-2xl p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group">
+          <div className="relative overflow-hidden rounded-none p-6 text-left shadow-lg shadow-blue-200/60 ring-1 ring-blue-300/70 bg-white/80 backdrop-blur hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-300/80 hover:ring-blue-400 transition-all duration-300 group">
             <div className="absolute right-4 top-4 w-9 h-9 text-2xl text-amber-700 drop-shadow-lg flex items-center justify-center bg-white/40 rounded-xl">
               👥
             </div>
@@ -667,7 +661,7 @@ const DashboardHome: React.FC = () => {
         {/* Secondary Stats Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
           {/* Completion Rate */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
+          <div className="bg-white rounded-none p-4 sm:p-6 border border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
             <p className="text-sm font-medium text-blue-800 mb-2">Completion Rate</p>
             <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
               {Number(stats.completionRate)?.toFixed
@@ -684,7 +678,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Tasks Created This Week */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white rounded-none p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
             <p className="text-sm font-medium text-blue-800 mb-2">Created This Week</p>
             <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
               {stats.tasksCreatedThisWeek}
@@ -693,7 +687,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Tasks Completed This Week */}
-          <div className="bg-white rounded-2xl p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white rounded-none p-6 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
             <p className="text-sm font-medium text-blue-800 mb-2">Completed This Week</p>
             <h3 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-500 to-green-600">
               {stats.tasksCompletedThisWeek}
@@ -703,7 +697,7 @@ const DashboardHome: React.FC = () => {
 
           {/* Overdue Tasks Card */}
           <div
-            className={`group rounded-2xl p-6 shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1 ${
+            className={`group rounded-none p-6 shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1 ${
               stats.overdueTasks > 0
                 ? 'bg-gradient-to-br from-red-500 to-red-600 hover:shadow-2xl hover:shadow-red-500/40'
                 : 'bg-white border-2 border-blue-100 hover:shadow-xl'
@@ -748,7 +742,7 @@ const DashboardHome: React.FC = () => {
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
           {/* Projects Overview */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
+          <div className="bg-white rounded-none p-6 sm:p-8 border border-blue-100 shadow-md hover:shadow-lg transition-all duration-300">
             <div className="flex justify-between items-center mb-6">
               <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
                 Projects Overview
@@ -813,7 +807,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Recent Activities */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white rounded-none p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
             {/* Header + actions */}
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800">
@@ -877,7 +871,7 @@ const DashboardHome: React.FC = () => {
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-blue-100 bg-blue-50 rounded-lg overflow-hidden mb-4">
+            <div className="flex border-b border-blue-100 bg-blue-50 rounded-none overflow-hidden mb-4">
               {[
                 {
                   key: 'unread',
@@ -1017,7 +1011,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Tasks by Priority */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white rounded-none p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
             <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800 mb-6">
               Tasks by Priority
             </h3>
@@ -1100,7 +1094,7 @@ const DashboardHome: React.FC = () => {
           </div>
 
           {/* Tasks by Status */}
-          <div className="bg-white rounded-2xl p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
+          <div className="bg-white rounded-none p-8 border-2 border-blue-100 shadow-lg hover:shadow-xl transition-all duration-300">
             <h3 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800 mb-6">
               Tasks by Status
             </h3>
