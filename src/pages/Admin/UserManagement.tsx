@@ -488,11 +488,11 @@ const res = await fetchAllRoles();
 
   const handleSave = async () => {
     try {
-      // ✅ Validate email format - regex chuẩn, dùng được 99% case thực tế
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      // ✅ Validate email format - chỉ chấp nhận @gmail.com và @st.cmcu.edu.vn
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|st\.cmcu\.edu\.vn)$/i;
       
       if (!form.email || !emailRegex.test(form.email)) {
-        toast.error("Invalid email! Email must be in valid format (e.g., user@example.com)");
+        toast.error("Email không đúng định dạng! Chỉ chấp nhận email có đuôi @gmail.com hoặc @st.cmcu.edu.vn");
         return;
       }
 
@@ -1204,19 +1204,19 @@ if (currentPage <= 3) {
                     const email = e.target.value;
                     setForm({ ...form, email });
                     
-                    // Validate email real-time - regex chuẩn, dùng được 99% case thực tế
-                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    // Validate email real-time - chỉ chấp nhận @gmail.com và @st.cmcu.edu.vn
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|st\.cmcu\.edu\.vn)$/i;
                     if (email && !emailRegex.test(email)) {
-                      setEmailError("Email must be in valid format (e.g., user@example.com)");
+                      setEmailError("Email không đúng định dạng! Chỉ chấp nhận email có đuôi @gmail.com hoặc @st.cmcu.edu.vn");
                     } else {
                       setEmailError("");
                     }
                   }}
                   onBlur={() => {
-                    // Validate on blur - regex chuẩn, dùng được 99% case thực tế
-                    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    // Validate on blur - chỉ chấp nhận @gmail.com và @st.cmcu.edu.vn
+                    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|st\.cmcu\.edu\.vn)$/i;
                     if (form.email && !emailRegex.test(form.email)) {
-                      setEmailError("Email must be in valid format (e.g., user@example.com)");
+                      setEmailError("Email không đúng định dạng! Chỉ chấp nhận email có đuôi @gmail.com hoặc @st.cmcu.edu.vn");
                     }
                   }}
                 />

@@ -169,11 +169,11 @@ const ScheduledReports: React.FC = () => {
       return;
     }
 
-    // Validate email format - regex chuẩn, dùng được 99% case thực tế (hỗ trợ email công ty như @codegym.vn)
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    // Validate email format - chỉ chấp nhận @gmail.com và @st.cmcu.edu.vn
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|st\.cmcu\.edu\.vn)$/i;
     for (const email of validRecipients) {
       if (!emailRegex.test(email)) {
-        toast.error(`Invalid email: ${email}`);
+        toast.error(`Email không đúng định dạng: ${email}. Chỉ chấp nhận email có đuôi @gmail.com hoặc @st.cmcu.edu.vn`);
         return;
       }
     }
