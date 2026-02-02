@@ -31,17 +31,16 @@ const GroupMemberCard: React.FC<GroupMemberCardProps> = ({
 
   const fullName = user?.full_name || "Unknown User";
   const getRoleClass = (role: string): string => {
-    // Flat, subtle pill styles by role
     const r = (role || "").toString();
     switch (r) {
       case "Người tạo":
       case "Creator":
       case "Owner":
-        return "bg-indigo-100 text-indigo-800";
+        return "bg-purple-100 text-purple-700";
       case "Quản trị viên":
       case "Administrator":
       case "Admin":
-        return "bg-amber-100 text-amber-800";
+        return "bg-blue-100 text-blue-700";
       case "Người xem":
       case "Viewer":
       case "ReadOnly":
@@ -53,7 +52,6 @@ const GroupMemberCard: React.FC<GroupMemberCardProps> = ({
   
   const translateRoleText = (role?: string | null) => {
     if (!role) return "Thành viên";
-    // Return Vietnamese role as-is, don't translate
     return role;
   };
   
@@ -67,19 +65,19 @@ const GroupMemberCard: React.FC<GroupMemberCardProps> = ({
 
   return (
     <div
-      className={`flex min-h-[200px] flex-col justify-between bg-white rounded-none border border-gray-200 p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md cursor-pointer ${
-        isUpdating ? "animate-pulse" : ""
+      className={`bg-white rounded-lg border border-gray-200 p-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer ${
+        isUpdating ? "opacity-70" : ""
       }`}
       onClick={onClick}
     >
-      {/* Row 1: avatar + name */}
-      <div className="flex items-center gap-4">
+      {/* Avatar and Name */}
+      <div className="flex items-center gap-3 mb-3">
         <div className="flex-shrink-0">
           {avatarUrl ? (
             <img
               src={avatarUrl}
               alt={fullName}
-              className="h-14 w-14 rounded-full object-cover ring-2 ring-blue-100"
+              className="h-12 w-12 rounded-full object-cover"
               onError={(e) => {
                 e.currentTarget.style.display = "none";
                 const ph = e.currentTarget.nextElementSibling as HTMLElement | null;
@@ -89,9 +87,8 @@ const GroupMemberCard: React.FC<GroupMemberCardProps> = ({
               }}
             />
           ) : null}
-
           <div
-            className={`h-14 w-14 rounded-full flex items-center justify-center text-white text-base font-semibold ring-2 ring-gray-100 ${
+            className={`h-12 w-12 rounded-full flex items-center justify-center text-white text-sm font-semibold ${
               avatarUrl ? "hidden" : "flex"
             }`}
             style={{ backgroundColor: placeholderBg }}
@@ -99,31 +96,28 @@ const GroupMemberCard: React.FC<GroupMemberCardProps> = ({
             {fullName.charAt(0).toUpperCase()}
           </div>
         </div>
-
         <div className="flex-1 min-w-0">
-          <h3 className="truncate text-[15px] font-semibold leading-6 text-gray-900">{fullName}</h3>
+          <h3 className="text-sm font-semibold text-gray-900 truncate">{fullName}</h3>
         </div>
       </div>
 
-      {/* Row 2: role (left-aligned) */}
-      <div className="mt-3">
-        <div className={`inline-block rounded-md px-2.5 py-1 text-xs font-medium ${roleClass}`}>
+      {/* Role Badge */}
+      <div className="mb-3">
+        <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${roleClass}`}>
           {translateRoleText(member.role_in_group)}
-        </div>
+        </span>
       </div>
 
-      {/* Row 3: button full width */}
-      <div className="mt-5">
-        <button
-          className="inline-flex w-full items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-blue-700"
-          onClick={(e) => {
-            e.stopPropagation();
-            onClick();
-          }}
-        >
-          View User's Board
-        </button>
-      </div>
+      {/* Button */}
+      <button
+        className="w-full px-3 py-2 rounded-lg text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
+      >
+        View Board
+      </button>
     </div>
   );
 };

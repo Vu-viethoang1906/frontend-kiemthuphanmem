@@ -677,28 +677,26 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
   return (
     <>
       
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white p-4 sm:p-6 lg:p-8">
+      <div className="min-h-screen bg-white p-6">
       {userIdError && (
-        <div className="mb-6 rounded border border-red-200 bg-red-100 px-4 py-3 text-sm font-semibold text-red-800">
+        <div className="mb-6 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-800">
           {userIdError}
         </div>
       )}
 
-      {!groupId && (
+      {!groupId && !selectedGroup && (
         <>
-          <div className="-mx-4 sm:-mx-6 lg:-mx-8 -mt-4 sm:-mt-6 lg:-mt-8 mb-4 sm:mb-6">
-            <GroupHeader
-              groupCount={totalGroups}
-              searchValue={search}
-              onSearchChange={setSearch}
-              onCreateClick={() => {
-                setShowForm(true);
-                setEditingGroup(null);
-                setForm({ name: "", description: "" });
-              }}
-              disabled={!!userIdError}
-            />
-          </div>
+          <GroupHeader
+            groupCount={totalGroups}
+            searchValue={search}
+            onSearchChange={setSearch}
+            onCreateClick={() => {
+              setShowForm(true);
+              setEditingGroup(null);
+              setForm({ name: "", description: "" });
+            }}
+            disabled={!!userIdError}
+          />
 
           {/* Groups Grid */}
           {hasPermissionError ? (
@@ -723,117 +721,109 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
               onDeleteGroup={handleDelete}
             />
           )}
+
+          {/* Pagination Controls */}
+          {!loading && totalGroups > itemsPerPage && (
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition w-full sm:w-auto ${
+                  currentPage === 1
+                    ? "cursor-not-allowed bg-gray-100 text-gray-400"
+                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                Previous
+              </button>
+
+              <div className="flex gap-1">
+                {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
+                  let pageNum: number;
+                  if (totalPages <= 5) pageNum = i + 1;
+                  else if (currentPage <= 3) pageNum = i + 1;
+                  else if (currentPage >= totalPages - 2) pageNum = totalPages - 4 + i;
+                  else pageNum = currentPage - 2 + i;
+
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => handlePageChange(pageNum)}
+                      className={`min-w-[40px] rounded-lg px-3 py-2 text-sm font-medium transition ${
+                        currentPage === pageNum
+                          ? "bg-blue-600 text-white"
+                          : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`rounded-lg px-4 py-2 text-sm font-medium transition w-full sm:w-auto ${
+                  currentPage === totalPages
+                    ? "cursor-not-allowed bg-gray-100 text-gray-400"
+                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+                }`}
+              >
+                Next
+              </button>
+
+              <span className="text-sm text-gray-600">
+                Page {currentPage} of {totalPages}
+              </span>
+            </div>
+          )}
         </>
       )}
 
-      {/* Pagination Controls */}
-      {!groupId && !loading && totalGroups > itemsPerPage && (
-        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-2 p-4 sm:p-6 lg:p-8">
-          <button
-            onClick={() => handlePageChange(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={`rounded-lg px-4 sm:px-5 py-2 text-sm font-semibold transition w-full sm:w-auto ${
-              currentPage === 1
-                ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                : "bg-black text-white hover:opacity-90"
-            }`}
-          >
-            ← Previous
-          </button>
-
-          <div className="flex gap-1.5">
-            {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
-              let pageNum: number;
-              if (totalPages <= 5) pageNum = i + 1;
-              else if (currentPage <= 3) pageNum = i + 1;
-              else if (currentPage >= totalPages - 2) pageNum = totalPages - 4 + i;
-              else pageNum = currentPage - 2 + i;
-
-              return (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={`min-w-[44px] rounded-lg px-3.5 py-2 text-sm transition ${
-                    currentPage === pageNum
-                      ? "bg-black font-bold text-white"
-                      : "border border-gray-200 bg-gray-100 text-gray-800 hover:bg-gray-200"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              );
-            })}
-          </div>
-
-          <button
-            onClick={() => handlePageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
-            className={`rounded-lg px-4 sm:px-5 py-2 text-sm font-semibold transition w-full sm:w-auto ${
-              currentPage === totalPages
-                ? "cursor-not-allowed bg-gray-200 text-gray-400"
-                : "bg-black text-white hover:opacity-90"
-            }`}
-          >
-            Next →
-          </button>
-
-          <span className="ml-5 text-sm font-medium text-gray-600">
-            Page {currentPage} of {totalPages}
-          </span>
-        </div>
-      )}
-
-      {/* Members section - Full overlay grid view */}
-      {/* Do not show error screen while resolving group; simply skip rendering */}
+      {/* Members section - Inline view with sidebar */}
       {selectedGroup && (
-        <div className="fixed inset-0 z-[100] w-full overflow-y-auto bg-gradient-to-br from-blue-50 via-white to-blue-50 p-4 sm:p-6 lg:p-10">
-          {/* Top row: name left, back right (no container frame) */}
-          <div className="mb-6 sm:mb-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
-            <div className="text-xl sm:text-2xl font-semibold tracking-wide text-gray-900">
-              {selectedGroup.name} - Members
+        <>
+          {/* Header */}
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-gray-900 mb-1">{selectedGroup.name}</h1>
+              <p className="text-sm text-gray-500">Group Members</p>
             </div>
             <button
-              className="inline-flex h-10 items-center justify-center rounded-md border border-blue-200 bg-white px-4 text-sm font-semibold text-blue-700 transition hover:bg-blue-50 w-full sm:w-auto"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-gray-700 font-medium hover:bg-gray-50 transition-colors"
               onClick={() => navigate(`${basePath}/groups`)}
             >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+              </svg>
               Back
             </button>
           </div>
 
-          {/* Second row removed: actions will live inside the toolbar below */}
-
-          {/* Members toolbar */}
-          <div className="mb-6 sm:mb-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 sm:gap-6 rounded-none border border-blue-100/80 bg-white/80 p-4 sm:p-6 lg:p-8 shadow-sm backdrop-blur-sm">
-            {/* Left: search */}
-            <div className="relative flex-1 w-full lg:min-w-[260px] lg:max-w-xl">
-              <svg
-                className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-blue-500"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
+          {/* Toolbar */}
+          <div className="mb-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="relative flex-1">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="11" cy="11" r="8" />
                 <path d="m21 21-4.35-4.35" />
               </svg>
               <input
                 value={membersSearch}
                 onChange={(e) => setMembersSearch(e.target.value)}
-                placeholder="Search members"
-                className="w-full rounded-none border border-blue-200/70 bg-white px-10 py-2.5 text-[15px] font-medium text-blue-700 placeholder-blue-300 transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                placeholder="Search members..."
+                className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm"
               />
             </div>
-            {/* Middle: (filters removed as requested) */}
-            {/* Right: actions */}
-            <div className="flex flex-col sm:flex-row shrink-0 items-stretch sm:items-center gap-3 w-full lg:w-auto lg:ml-auto">
+            <div className="flex items-center gap-2">
               <button
-                className="inline-flex h-10 items-center justify-center rounded-md bg-teal-500 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-600 w-full sm:w-auto"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
                 onClick={() => setShowManageMembers(true)}
               >
                 Manage Users
               </button>
               <button
-                className="inline-flex h-10 items-center justify-center rounded-md bg-blue-600 px-4 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 w-full sm:w-auto"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
                 onClick={() => handleEdit(selectedGroup)}
               >
                 Edit
@@ -841,47 +831,46 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
               {(userRoleMap[selectedGroup._id || selectedGroup.id] === 'Quản trị viên' ||
                 userRoleMap[selectedGroup._id || selectedGroup.id] === 'Người tạo') && (
                 <button
-                  className="inline-flex h-10 items-center justify-center rounded-md bg-white px-4 text-sm font-semibold text-red-600 transition hover:bg-red-50 border border-red-500 w-full sm:w-auto"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-red-500 text-red-600 font-medium hover:bg-red-50 transition-colors"
                   onClick={() => handleDelete(selectedGroup._id || selectedGroup.id)}
                 >
-                  Remove Group
+                  Remove
                 </button>
               )}
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 py-6 sm:py-8 lg:py-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {/* Members Grid */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {filteredMembersInGroup.length === 0 ? (
-              <div className="col-span-full rounded-xl border border-dashed border-blue-200 bg-white p-12 text-center text-blue-600">
-                No members found
+              <div className="col-span-full rounded-lg border border-dashed border-gray-300 bg-gray-50 p-12 text-center">
+                <p className="text-gray-500">No members found</p>
               </div>
             ) : (
-            filteredMembersInGroup.map((m, idx) => {
-              // Use the shared GroupMemberCard component for consistent styling
-              // Determine current user id and updating state so we can pass props
-              let user = null;
-              if (typeof m.user_id === "object" && m.user_id !== null) {
-                user = m.user_id;
-              } else if (typeof m.user === "object" && m.user !== null) {
-                user = m.user;
-              }
-              const currentUserId = user?._id || user?.id || m.user_id;
-              const isUpdating = updatingRoles.has(currentUserId);
-              const currentGroupId = selectedGroup?._id || '';
+              filteredMembersInGroup.map((m, idx) => {
+                let user = null;
+                if (typeof m.user_id === "object" && m.user_id !== null) {
+                  user = m.user_id;
+                } else if (typeof m.user === "object" && m.user !== null) {
+                  user = m.user;
+                }
+                const currentUserId = user?._id || user?.id || m.user_id;
+                const isUpdating = updatingRoles.has(currentUserId);
+                const currentGroupId = selectedGroup?._id || '';
 
-              return (
-                <GroupMemberCard
-                  key={m._id || m.id || idx}
-                  member={m}
-                  isUpdating={isUpdating}
-                  baseUrl={BASE_URL}
-                  onClick={() => handleMemberClick(currentUserId, currentGroupId)}
-                />
-              );
-            })
+                return (
+                  <GroupMemberCard
+                    key={m._id || m.id || idx}
+                    member={m}
+                    isUpdating={isUpdating}
+                    baseUrl={BASE_URL}
+                    onClick={() => handleMemberClick(currentUserId, currentGroupId)}
+                  />
+                );
+              })
             )}
           </div>
-        </div>
+        </>
       )}
 
       {/* Manage Members Modal */}
@@ -889,25 +878,27 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
         <div
           role="dialog"
           aria-modal="true"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 p-5"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 p-5"
           onClick={(e) => {
             if (e.target === e.currentTarget) setShowManageMembers(false);
           }}
         >
           <div
-            className="w-full max-w-4xl max-h-[85vh] overflow-visible rounded-none bg-white shadow-2xl ring-1 ring-black/5 flex flex-col"
+            className="w-full max-w-4xl max-h-[85vh] overflow-visible rounded-lg bg-white shadow-lg flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b px-6 py-4">
-              <h2 className="text-lg font-semibold text-gray-800">
+            <div className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
+              <h2 className="text-lg font-semibold text-gray-900">
                 Manage Members: {selectedGroup.name}
               </h2>
               <button
                 onClick={() => setShowManageMembers(false)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-gray-600 hover:bg-gray-100"
+                className="text-gray-400 hover:text-gray-600 transition-colors"
                 aria-label="Close"
               >
-                ✕
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 
@@ -915,15 +906,15 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">Name</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-600">Role</th>
-                    <th className="px-4 py-3 text-center text-xs font-semibold uppercase tracking-wide text-gray-600">Action</th>
+                    <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">Name</th>
+                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Role</th>
+                    <th className="px-6 py-3 text-center text-xs font-semibold text-gray-700 uppercase tracking-wider">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="bg-white divide-y divide-gray-200">
                   {groupMembers.length === 0 ? (
                     <tr>
-                      <td colSpan={3} className="px-4 py-10 text-center text-sm text-gray-500">No members found</td>
+                      <td colSpan={3} className="px-6 py-10 text-center text-sm text-gray-500">No members found</td>
                     </tr>
                   ) : (
                     groupMembers.map((m, idx) => {
@@ -941,50 +932,51 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
                       const currentUserId = user?._id || user?.id || m.user_id;
                       const isUpdating = updatingRoles.has(currentUserId);
                       const isSuccess = successRoles.has(currentUserId);
+                      const nameForColor = (fullName || "U").toString();
+                      const hue = Math.abs(nameForColor.split("").reduce((a: number, c: string) => a + c.charCodeAt(0), 0)) % 360;
+                      const placeholderBg = `hsl(${hue}, 70%, 50%)`;
 
                       return (
-                        <tr key={m._id || m.id || idx}>
-                          <td className="px-4 py-3">
+                        <tr key={m._id || m.id || idx} className={`hover:bg-gray-50 ${isSuccess ? 'bg-green-50' : ''}`}>
+                          <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
                               {avatarUrl ? (
-                                <img src={avatarUrl} alt={fullName} className="h-9 w-9 rounded-full object-cover ring-2 ring-blue-100" />
+                                <img src={avatarUrl} alt={fullName} className="h-10 w-10 rounded-full object-cover" />
                               ) : (
-                                <div className="h-9 w-9 rounded-full bg-blue-600 text-white ring-2 ring-blue-100 flex items-center justify-center font-bold">
+                                <div className="h-10 w-10 rounded-full text-white flex items-center justify-center font-semibold text-sm" style={{ backgroundColor: placeholderBg }}>
                                   {fullName.charAt(0).toUpperCase()}
                                 </div>
                               )}
-                              <span className="font-medium text-gray-800">{fullName}</span>
+                              <span className="font-medium text-gray-900">{fullName}</span>
                             </div>
                           </td>
-                          <td className={`px-4 py-3 align-middle text-center ${isSuccess ? 'bg-green-50' : ''}`}>
+                          <td className="px-6 py-4 text-center">
                             <div className="relative inline-block">
                               <select
                                 value={m.role_in_group}
                                 onChange={(e) => handleUpdateMemberRole(currentUserId, e.target.value)}
                                 disabled={isUpdating}
-                                className={`rounded-none border border-blue-300 bg-blue-50/60 px-3 py-2 text-sm font-medium text-blue-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-100 ${isUpdating ? 'opacity-70 cursor-wait' : 'cursor-pointer'}`}
+                                className={`rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 ${isUpdating ? 'opacity-70 cursor-wait' : 'cursor-pointer'}`}
                               >
                                 <option value="Người tạo">Creator</option>
                                 <option value="Quản trị viên">Administrator</option>
                                 <option value="Người xem">Viewer</option>
                               </select>
                               {isUpdating && (
-                                <div className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-blue-200 border-t-blue-600 animate-spin" />
+                                <div className="absolute right-2 top-1/2 -translate-y-1/2 h-4 w-4 rounded-full border-2 border-gray-300 border-t-blue-600 animate-spin" />
                               )}
                             </div>
                           </td>
-                          <td className="px-4 py-3 align-middle text-center">
+                          <td className="px-6 py-4 text-center">
                             {(userRoleMap[selectedGroup._id || selectedGroup.id] === "Quản trị viên" ||
                               userRoleMap[selectedGroup._id || selectedGroup.id] === "Người tạo") &&
                               groupMembers.length > 1 && (
-                                <div className="inline-flex justify-center">
-                                  <button
-                                    className="inline-flex items-center rounded-md border border-red-500 px-3 py-1.5 text-sm font-semibold text-red-600 transition hover:bg-red-50"
-                                    onClick={() => handleRemoveMember(user?._id || user?.id || m.user_id, fullName)}
-                                  >
-                                    Remove
-                                  </button>
-                                </div>
+                                <button
+                                  className="inline-flex items-center rounded-lg border border-red-500 px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-50"
+                                  onClick={() => handleRemoveMember(user?._id || user?.id || m.user_id, fullName)}
+                                >
+                                  Remove
+                                </button>
                               )}
                           </td>
                         </tr>
@@ -996,11 +988,11 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
             </div>
 
             {/* Add member UI */}
-            <div className="border-t bg-gray-50/60">
-              <div className="flex flex-col gap-3 px-6 pt-4 pb-7 sm:flex-row sm:items-center">
+            <div className="border-t border-gray-200 bg-gray-50 px-6 py-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <div className="relative flex-1">
                   <input
-                    className="w-full rounded-none border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-100"
+                    className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Enter name or email to add member..."
                     value={addUserQuery}
                     onChange={(e) => setAddUserQuery(e.target.value)}
@@ -1070,7 +1062,7 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
                     }
                     return (
                       <ul
-                        className="absolute z-50 mt-1 max-h-64 w-full overflow-auto rounded-none border border-gray-200 bg-white shadow-lg"
+                        className="absolute z-50 mt-1 max-h-64 w-full overflow-auto rounded-lg border border-gray-200 bg-white shadow-lg"
                         onMouseDown={(e) => e.stopPropagation()}
                       >
                         {filteredResults.map((u) => (
@@ -1082,9 +1074,9 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
                               setAddUserResults(null);
                               setAddedUsersForAdd(prev => [...prev, u]);
                             }}
-                            className="cursor-pointer px-3 py-2 text-sm hover:bg-blue-50"
+                            className="cursor-pointer px-3 py-2 text-sm hover:bg-gray-50"
                           >
-                            <div className="font-medium text-gray-800">{u.username || u.full_name || u.email}</div>
+                            <div className="font-medium text-gray-900">{u.username || u.full_name || u.email}</div>
                             <div className="text-xs text-gray-500">{u.email || ''}</div>
                           </li>
                         ))}
@@ -1092,13 +1084,13 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
                     );
                   })()}
                 </div>
-                <select id="add-user-role" className="rounded-none border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:border-blue-400 focus:outline-none">
+                <select id="add-user-role" className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                   <option value="Người xem">Viewer</option>
                   <option value="Quản trị viên">Administrator</option>
                   <option value="Người tạo">Creator</option>
                 </select>
                 <button
-                  className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
+                  className="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
                   onClick={async () => {
                     if (addedUsersForAdd.length === 0) {
                       notify('success', 'Notice', 'Please select at least 1 member to add.');
