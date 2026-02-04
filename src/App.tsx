@@ -35,7 +35,7 @@ import BoardSettings from './pages/Board/BoardSettings';
 import RolePermissionEdit from './pages/Admin/RolePermissionEdit';
 import TemplateManagement from './pages/Template/TemplateManagement';
 import CenterManagement from './pages/Center/CenterManagement';
-import CenterMembers from './pages/Center/CenterMembers';
+import CenterMembers from './pages/Center/CenterMembersPage';
 import CenterMemberBoards from './pages/Center/CenterMemberBoards';
 import UserPointsManagement from './pages/Admin/UserPointsManagement';
 import BoardMember from './pages/Board/BoardMember';

@@ -529,7 +529,15 @@ const res = await fetchAllRoles();
         );
       } else {
         const result = await createUser(payload);
-        userId = result._id || result.id || "";
+        // Backend có thể trả _id ở result, result.user, hoặc result.data
+        userId =
+          result._id ||
+          result.id ||
+          (result as any).user?._id ||
+          (result as any).user?.id ||
+          (result as any).data?._id ||
+          (result as any).data?.id ||
+          "";
         toast.success(
           <div>
             <div className="font-semibold mb-1">New user created successfully!</div>
@@ -549,16 +557,25 @@ const res = await fetchAllRoles();
               // Ignore nếu không xóa được
             }
           }
-          
           // Thêm vào center mới
           await addCenterMember({
             center_id: form.center_id,
             user_id: userId,
             role_in_center: "Member"
           });
-        } catch (centerErr) {
-          // Không báo lỗi, vì user đã được tạo/cập nhật thành công
+        } catch (centerErr: any) {
+          const msg = centerErr?.response?.data?.message || centerErr?.message;
+          toast.error(
+            msg
+              ? `User saved but could not add to center: ${msg}`
+              : "User saved but could not add to center. You can assign center later from the user list."
+          );
         }
+      } else if (form.center_id && !userId) {
+        toast(
+          "User created but center could not be assigned (user id not returned). Please assign center from the user list.",
+          { icon: "⚠️", duration: 5000 }
+        );
       }
 
       setShowModal(false);

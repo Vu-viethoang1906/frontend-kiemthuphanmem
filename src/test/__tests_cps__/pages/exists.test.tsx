@@ -16,7 +16,7 @@ describe('pages folder integrity', () => {
     'pages/Board/BoardSummary',
     'pages/Board/lineChart',
     'pages/Center/CenterManagement',
-    'pages/Center/CenterMembers',
+    'pages/Center/CenterMembersPage',
     'pages/DashBoard/Dashboard',
     'pages/DashBoard/DashboardHome',
     'pages/Filters/Filters',

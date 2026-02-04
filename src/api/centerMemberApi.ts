@@ -69,8 +69,27 @@ export const getMyCenters = async () => {
 
 // Thêm member vào center
 export const addCenterMember = async (data: AddCenterMemberData) => {
-  const response = await axiosInstance.post("/centerMember", data);
-  return response.data;
+  const endpoints = [
+    () => axiosInstance.post("/centerMember", data),
+    () => axiosInstance.post("/CenterMember", data),
+  ];
+  for (const post of endpoints) {
+    try {
+      const response = await post();
+      return response.data;
+    } catch (err: any) {
+      const status = err?.response?.status;
+      if (status === 404 || status === 405) continue;
+      throw err;
+    }
+  }
+  // Fallback: POST /centerMember/:centerId/members
+  const { center_id, user_id, role_in_center } = data;
+  const res = await axiosInstance.post(
+    `/centerMember/${center_id}/members`,
+    { user_id, role_in_center: role_in_center || "Member" }
+  );
+  return res.data;
 };
 
 // Xóa member khỏi center

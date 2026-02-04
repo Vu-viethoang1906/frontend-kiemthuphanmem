@@ -3,17 +3,14 @@ import { useParams, useNavigate } from "react-router-dom";
 // Using console logging instead of toast to avoid test failures
 import { getCenterMembers, CenterMember } from "../../api/centerMemberApi";
 import { getCenterById, Center } from "../../api/centerApi";
-import CenterMemberCard from "../../components/Center/CenterMemberCard";
-import { API_BASE_URL } from "../../utils/apiConfig";
 
-const CenterMembers: React.FC = () => {
+const CenterMembersPage: React.FC = () => {
   const { centerId } = useParams<{ centerId: string }>();
   const navigate = useNavigate();
   const [center, setCenter] = useState<Center | null>(null);
   const [members, setMembers] = useState<CenterMember[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
 
   // Check admin
   const rolesRaw = localStorage.getItem("roles");
@@ -81,7 +78,7 @@ const CenterMembers: React.FC = () => {
     if (memberId && centerId) {
       // Get basePath (e.g., /dashboard or /admin)
       const basePath = window.location.pathname.includes('/admin') ? '/admin' : '/dashboard';
-      // Navigate to route showing member's boards in center (using userId as parameter name)
+      // Navigate to route showing member's boards in center (using userId parameter name)
       navigate(`${basePath}/center/${centerId}/member/${memberId}/boards`);
     }
   };
@@ -138,34 +135,10 @@ const CenterMembers: React.FC = () => {
             className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm"
           />
         </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setViewMode('grid')}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-              viewMode === 'grid'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-            }`}
-            title="Grid view"
-          >
-            <i className="bi bi-grid-3x2"></i>
-          </button>
-          <button
-            onClick={() => setViewMode('list')}
-            className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-              viewMode === 'list'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white border border-gray-300 text-gray-700 hover:bg-gray-50'
-            }`}
-            title="List view"
-          >
-            <i className="bi bi-list-ul"></i>
-          </button>
-          <div className="ml-2">
-            <span className="inline-flex items-center rounded-md bg-blue-100 px-3 py-1.5 text-sm font-semibold text-blue-700">
-              {filteredMembers.length} member{filteredMembers.length !== 1 ? 's' : ''}
-            </span>
-          </div>
+        <div className="ml-2">
+          <span className="inline-flex items-center rounded-md bg-blue-100 px-3 py-1.5 text-sm font-semibold text-blue-700">
+            {filteredMembers.length} member{filteredMembers.length !== 1 ? 's' : ''}
+          </span>
         </div>
       </div>
 
@@ -174,31 +147,7 @@ const CenterMembers: React.FC = () => {
         <div className="flex items-center justify-center py-10">
           <div className="w-10 h-10 rounded-full border-4 border-slate-200 border-t-blue-500 animate-spin" />
         </div>
-      ) : viewMode === 'grid' ? (
-        // Grid View
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filteredMembers.length === 0 ? (
-            <div className="col-span-full rounded-lg border border-dashed border-gray-300 bg-gray-50 p-12 text-center">
-              <p className="text-gray-500">No members found</p>
-            </div>
-          ) : (
-            filteredMembers.map((member, idx) => {
-              const userData = member.user || member;
-              const currentUserId = (userData as any)._id || (userData as any).id || member.user_id;
-              
-              return (
-                <CenterMemberCard
-                  key={member._id || idx}
-                  member={member}
-                  baseUrl={API_BASE_URL}
-                  onClick={() => handleMemberClick(currentUserId)}
-                />
-              );
-            })
-          )}
-        </div>
       ) : (
-        // List View
         <div className="rounded-lg border border-slate-200 bg-white shadow-sm overflow-hidden">
           {/* Mobile list (sm) */}
           <div className="block md:hidden">
@@ -334,4 +283,4 @@ const CenterMembers: React.FC = () => {
   );
 };
 
-export default CenterMembers;
+export default CenterMembersPage;
