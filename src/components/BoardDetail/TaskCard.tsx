@@ -587,26 +587,32 @@ const TaskCard: React.FC<TaskCardProps> = ({
                 </svg>
               </div>
             ) : localAssignee ? (
-              <img
-                src={getAvatarImageUrl({ ...task, assigned_to: localAssignee })}
-                alt={localAssignee.username}
-                className="assignee-avatar"
-                onError={(e) => {
-                  // Fallback to initial/placeholder if image fails
-                  (e.target as HTMLImageElement).onerror = null;
-                  (e.target as HTMLImageElement).style.backgroundColor =
-                    getAvatarColor(localAssignee?.username || "U");
-                  (e.target as HTMLImageElement).alt =
-                    localAssignee?.username?.slice(0, 2).toUpperCase() || "U";
-                  const color = getAvatarColor(localAssignee?.username || "U");
-                  const initial =
-                    localAssignee?.username?.slice(0, 2).toUpperCase() || "U";
-                  const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect width='40' height='40' fill='${color}'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='16' fill='#fff'>${initial}</text></svg>`;
-                  (
-                    e.target as HTMLImageElement
-                  ).src = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-                }}
-              />
+              (() => {
+                const avatarUrl = getAvatarImageUrl({ ...task, assigned_to: localAssignee });
+                if (!avatarUrl) {
+                  return (
+                    <div className="assignee-placeholder">
+                      {localAssignee?.username?.slice(0, 2).toUpperCase() || "U"}
+                    </div>
+                  );
+                }
+                return (
+                  <img
+                    src={avatarUrl}
+                    alt={localAssignee.username}
+                    className="assignee-avatar"
+                    onError={(e) => {
+                      // Fallback to initial/placeholder if image fails
+                      (e.target as HTMLImageElement).onerror = null;
+                      const color = getAvatarColor(localAssignee?.username || "U");
+                      const initial =
+                        localAssignee?.username?.slice(0, 2).toUpperCase() || "U";
+                      const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><rect width='40' height='40' fill='${color}'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Arial' font-size='16' fill='#fff'>${initial}</text></svg>`;
+                      (e.target as HTMLImageElement).src = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+                    }}
+                  />
+                );
+              })()
             ) : (
               <div className="assignee-placeholder">+</div>
             )}

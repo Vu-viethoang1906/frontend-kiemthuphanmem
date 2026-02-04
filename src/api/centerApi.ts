@@ -63,3 +63,11 @@ export const deleteCenter = async (id: string) => {
   const response = await axiosInstance.delete(`/centers/${id}`);
   return response.data;
 };
+// Lấy các bảng của một thành viên trong center
+export const fetchCenterMemberBoards = async (userId: string, centerId: string) => {
+  const response = await axiosInstance.post(`/centers/getMemberBoards`, {
+    idUser: userId,
+    idCenter: centerId,
+  });
+  return response.data;
+};

@@ -1,10 +1,10 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import GroupMemberCard from '../../../components/Group/GroupMemberCard';
+import CenterMemberCard from '../../../components/Center/CenterMemberCard';
 
-describe('components/Group/GroupMemberCard', () => {
+describe('components/Center/CenterMemberCard', () => {
   const baseMember = {
-    role_in_group: 'Administrator',
+    role_in_center: 'Administrator',
     user_id: {
       _id: 'u1',
       full_name: 'Alice',
@@ -15,7 +15,7 @@ describe('components/Group/GroupMemberCard', () => {
   it('renders with initial when no avatar and handles click', () => {
     const onClick = jest.fn();
     render(
-      <GroupMemberCard
+      <CenterMemberCard
         member={baseMember}
         baseUrl={'http://localhost:3005'}
         onClick={onClick}
@@ -23,7 +23,7 @@ describe('components/Group/GroupMemberCard', () => {
     );
 
     expect(screen.getByText('A')).toBeInTheDocument();
-    fireEvent.click(screen.getByText("View Board"));
+    fireEvent.click(screen.getByText("View Boards"));
     expect(onClick).toHaveBeenCalled();
   });
 
@@ -34,7 +34,7 @@ describe('components/Group/GroupMemberCard', () => {
       user_id: { ...baseMember.user_id, avatar_url: 'uploads/avatar.png' },
     };
     render(
-      <GroupMemberCard
+      <CenterMemberCard
         member={memberWithAvatar}
         baseUrl={'http://localhost:3005'}
         onClick={onClick}
@@ -46,9 +46,9 @@ describe('components/Group/GroupMemberCard', () => {
 
   it('shows role badge text', () => {
     const onClick = jest.fn();
-    const member = { ...baseMember, role_in_group: 'Viewer' };
+    const member = { ...baseMember, role_in_center: 'Viewer' };
     render(
-      <GroupMemberCard
+      <CenterMemberCard
         member={member}
         baseUrl={'http://localhost:3005'}
         onClick={onClick}

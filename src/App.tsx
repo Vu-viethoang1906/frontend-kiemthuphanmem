@@ -36,6 +36,7 @@ import RolePermissionEdit from './pages/Admin/RolePermissionEdit';
 import TemplateManagement from './pages/Template/TemplateManagement';
 import CenterManagement from './pages/Center/CenterManagement';
 import CenterMembers from './pages/Center/CenterMembers';
+import CenterMemberBoards from './pages/Center/CenterMemberBoards';
 import UserPointsManagement from './pages/Admin/UserPointsManagement';
 import BoardMember from './pages/Board/BoardMember';
 import HelpButton from './components/HelpButton/HelpButton';
@@ -277,6 +278,10 @@ function AnimatedRoutes() {
         <Route path="templates" element={<TemplateManagement />} />
         <Route path="centers" element={<CenterManagement />} />
         <Route path="centers/:centerId/members" element={<CenterMembers />} />
+        <Route path="center/:centerId/members" element={<CenterMembers />} />
+        <Route path="center/:centerId/member/:userId/boards" element={<CenterMemberBoards />} />
+        <Route path="center/:centerId/members" element={<CenterMembers />} />
+        <Route path="center/:centerId/member/:userId/boards" element={<CenterMemberBoards />} />
         <Route path="userpoints" element={<UserPointsManagement />} />
         <Route path="boards/:id" element={<BoardDetail />} />
         <Route path="boards/:id/settings" element={<BoardSettings />} />
