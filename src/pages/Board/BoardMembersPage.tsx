@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchBoardMembers } from '../../api/boardMemberApi';
+import { fetchBoardMembers, removeBoardMember } from '../../api/boardMemberApi';
 import { fetchBoardById } from '../../api/boardApi';
 import { toast } from 'react-hot-toast';
+import { useModal } from '../../components/ModalProvider';
+import { getMe } from '../../api/authApi';
 
 // Function to get avatar color from name
 const getAvatarColor = (name: string): string => {
@@ -32,10 +34,51 @@ const getAvatarColor = (name: string): string => {
 const BoardMembersPage: React.FC = () => {
   const { id: boardId } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { confirm } = useModal();
   const [board, setBoard] = useState<any>(null);
   const [members, setMembers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [removingUserId, setRemovingUserId] = useState<string | null>(null);
+
+  // Admin system (có quyền xóa thành viên board)
+  const rolesRaw = typeof localStorage !== 'undefined' ? localStorage.getItem('roles') : null;
+  const isAdmin = useMemo(() => {
+    try {
+      const roles = rolesRaw ? JSON.parse(rolesRaw) : [];
+      return Array.isArray(roles) && roles.some((r: string) => ['admin', 'System_Manager'].includes(r));
+    } catch {
+      return false;
+    }
+  }, [rolesRaw]);
+
+  // Vai trò của user hiện tại trong board (chỉ người tạo board mới được xóa thành viên khác)
+  const currentUserRole = useMemo(() => {
+    if (!currentUserId || !members.length) return null;
+    const m = members.find((member: any) => {
+      const uid = member.user_id?._id || member.user_id?.id || member.user_id;
+      return uid && (String(uid) === String(currentUserId));
+    });
+    return m?.role_in_board || null;
+  }, [members, currentUserId]);
+
+  const canRemoveMembers =
+    isAdmin || currentUserRole === 'Người tạo';
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const me = await getMe();
+        if (me?.success && me?.data?._id) setCurrentUserId(me.data._id);
+        else if (me?.data?.id) setCurrentUserId(me.data.id);
+      } catch {
+        const uid = typeof localStorage !== 'undefined' ? localStorage.getItem('userId') : null;
+        if (uid) setCurrentUserId(uid);
+      }
+    };
+    loadUser();
+  }, []);
+
   // Get role color based on role name
   const getRoleColor = useMemo(() => {
     const colorMap: Record<string, string> = {};
@@ -70,29 +113,47 @@ const BoardMembersPage: React.FC = () => {
     return (role: string) => colorMap[role] || 'bg-gray-100 text-gray-800';
   }, [members]);
 
+  const loadData = async () => {
+    if (!boardId) return;
+    try {
+      setLoading(true);
+      const boardRes = await fetchBoardById(boardId);
+      setBoard(boardRes.data || boardRes);
+      const membersRes = await fetchBoardMembers(boardId);
+      const membersData = membersRes?.data?.data || membersRes?.data || [];
+      setMembers(Array.isArray(membersData) ? membersData : []);
+    } catch (error) {
+      console.error('Error loading data:', error);
+      toast.error('Failed to load member information');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const loadData = async () => {
-      if (!boardId) return;
-      
-      try {
-        setLoading(true);
-        const boardRes = await fetchBoardById(boardId);
-        setBoard(boardRes.data || boardRes);
-        
-        const membersRes = await fetchBoardMembers(boardId);
-        const membersData = membersRes?.data?.data || membersRes?.data || [];
-        setMembers(membersData);
-        
-      } catch (error) {
-        console.error('Error loading data:', error);
-        toast.error('Failed to load member information');
-      } finally {
-        setLoading(false);
-      }
-    };
-    
     loadData();
   }, [boardId]);
+
+  const handleRemoveFromBoard = async (userId: string, displayName: string) => {
+    if (!boardId || !userId) return;
+    const ok = await confirm({
+      title: 'Xác nhận xóa khỏi board',
+      message: `Bạn có chắc muốn xóa "${displayName}" ra khỏi board này?`,
+      variant: 'info',
+    });
+    if (!ok) return;
+    try {
+      setRemovingUserId(userId);
+      await removeBoardMember(boardId, userId);
+      toast.success('Đã xóa thành viên khỏi board');
+      await loadData();
+    } catch (err: any) {
+      const msg = err?.response?.data?.message || err?.message || 'Không thể xóa thành viên';
+      toast.error(msg);
+    } finally {
+      setRemovingUserId(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -138,12 +199,17 @@ const BoardMembersPage: React.FC = () => {
                   <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Role
                   </th>
+                  {canRemoveMembers && (
+                    <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Action
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {members.length === 0 ? (
                   <tr>
-                    <td colSpan={2} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                    <td colSpan={canRemoveMembers ? 3 : 2} className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
                       No members in this board yet
                     </td>
                   </tr>
@@ -153,9 +219,8 @@ const BoardMembersPage: React.FC = () => {
                     const userName = user.full_name || user.username || 'Member';
                     const userEmail = user.email || 'No email';
                     const role = member.role_in_board || 'Member';
-                    const isAdmin = role === 'admin' || role === 'System_Manager';
-                    const isCreator = role === 'Creator';
-                    
+                    const memberUserId = user._id || user.id || member.user_id;
+
                     return (
                       <tr key={member._id || member.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -184,6 +249,18 @@ const BoardMembersPage: React.FC = () => {
                             </span>
                           </div>
                         </td>
+                        {canRemoveMembers && (
+                          <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveFromBoard(String(memberUserId), userName)}
+                              disabled={removingUserId === String(memberUserId)}
+                              className="inline-flex items-center rounded-md border border-red-500 px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 disabled:opacity-60"
+                            >
+                              {removingUserId === String(memberUserId) ? '...' : 'Xóa khỏi board'}
+                            </button>
+                          </td>
+                        )}
                       </tr>
                     );
                   })
