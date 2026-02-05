@@ -629,6 +629,35 @@ await updateGroupMemberRole({ requester_id, user_id, group_id, role_in_group });
     }
   };
 
+  // Rời nhóm (thành viên tự rời, có xác nhận; chỉ còn 1 người thì không cho rời)
+  const handleLeaveGroup = async () => {
+    if (!selectedGroup || !userId) {
+      notify('error', 'Error', 'No group or user.');
+      return;
+    }
+    const group_id = selectedGroup._id || selectedGroup.id;
+    const memberCount = groupMembers?.length ?? 0;
+    if (memberCount <= 1) {
+      notify('error', 'Không thể rời nhóm', 'Chỉ còn một thành viên. Bạn chỉ có thể xóa nhóm.');
+      return;
+    }
+    const ok = await confirm({
+      title: 'Xác nhận rời nhóm',
+      message: 'Bạn có chắc muốn rời khỏi nhóm này?',
+      variant: 'info',
+    });
+    if (!ok) return;
+    try {
+      await removeGroupMember({ requester_id: userId, user_id: userId, group_id });
+      notify('success', 'Đã rời nhóm', 'Bạn đã rời khỏi nhóm thành công.');
+      await loadGroups();
+      navigate(`${basePath}/groups`);
+    } catch (e: any) {
+      const msg = e?.response?.data?.message || e?.message || 'Không thể rời nhóm.';
+      notify('error', 'Rời nhóm thất bại', msg);
+    }
+  };
+
   // Remove member (chỉ cho phép nếu là quản trị viên hoặc người tạo)
   const handleRemoveMember = async (user_id: string, userName?: string) => {
     if (!selectedGroup) {
@@ -815,7 +844,7 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
                 className="w-full pl-9 pr-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-sm"
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <button
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700 transition-colors"
                 onClick={() => setShowManageMembers(true)}
@@ -828,6 +857,15 @@ message: `Are you sure you want to remove member ${userName || 'this'} from the 
               >
                 Edit
               </button>
+              {groupMembers.length > 1 && (
+                <button
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-amber-500 text-amber-700 font-medium hover:bg-amber-50 transition-colors"
+                  onClick={handleLeaveGroup}
+                  title="Rời khỏi nhóm này"
+                >
+                  Rời nhóm
+                </button>
+              )}
               {(userRoleMap[selectedGroup._id || selectedGroup.id] === 'Quản trị viên' ||
                 userRoleMap[selectedGroup._id || selectedGroup.id] === 'Người tạo') && (
                 <button
