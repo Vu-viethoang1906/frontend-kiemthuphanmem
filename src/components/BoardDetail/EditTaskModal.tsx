@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import "../../styles/BoardDetail/CreateTaskModal.css";
 import CommentSection, { TaskComment } from "../CommentSection";
+import ChecklistSection from "./ChecklistSection";
 import { downloadFile, deleteFileFromTask, uploadFileToTask } from "../../api/fileApi";
 import {
   isoToDateTimeLocal,
@@ -347,6 +348,19 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-900 placeholder-gray-400 resize-none"
               />
             </div>
+
+            {/* Checklist Section */}
+            {(editingTask._id || editingTask.id) && (
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Danh sách kiểm tra
+                </label>
+                <ChecklistSection
+                  taskId={editingTask._id || editingTask.id}
+                  onChecklistUpdate={undefined}
+                />
+              </div>
+            )}
 
             {/* Assigned To & Tags */}
             <div className="grid grid-cols-2 gap-4">
