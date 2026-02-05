@@ -92,18 +92,16 @@ export const addCenterMember = async (data: AddCenterMemberData) => {
   return res.data;
 };
 
-// Xóa member khỏi center
+// Xóa member khỏi center (theo centerId + userId - tự tìm member_id)
 export const removeCenterMember = async (centerId: string, userId: string) => {
   try {
-    // Lấy tất cả members của center để tìm record có user_id khớp
     const membersResponse = await axiosInstance.get(
       `/centerMember/${centerId}/members`
     );
-    const members = membersResponse.data?.data || [];
+    const members = membersResponse.data?.data || membersResponse.data || [];
 
-    // Tìm centerMember record có user_id khớp
     const memberRecord = members.find((m: any) => {
-      const memberUserId = m.user_id?._id || m.user_id?.id || m.user_id;
+      const memberUserId = m.user_id?._id || m.user_id?.id || m._id || m.user_id;
       return (
         memberUserId === userId ||
         memberUserId?.toString() === userId?.toString()
@@ -114,19 +112,14 @@ export const removeCenterMember = async (centerId: string, userId: string) => {
       throw new Error("Không tìm thấy thành viên trong center này");
     }
 
-    // Lấy member_id từ record (có thể là m._id hoặc m.member_id)
-    const memberId = memberRecord.member_id || memberRecord._id;
-
+    const memberId = (memberRecord as any).member_id || memberRecord._id;
     if (!memberId) {
       throw new Error("Không tìm thấy ID của centerMember record");
     }
 
-    // Xóa bằng member_id
     const response = await axiosInstance.delete(`/centerMember/${memberId}`);
     return response.data;
   } catch (error: any) {
-    // Nếu không tìm thấy member, có thể user không có trong center này
-    // Trả về success để không block flow
     if (
       error.response?.status === 404 ||
       error.message?.includes("Không tìm thấy")
@@ -135,6 +128,12 @@ export const removeCenterMember = async (centerId: string, userId: string) => {
     }
     throw error;
   }
+};
+
+// Xóa member khỏi center theo member_id (record ID) - dùng khi đã có member_id từ danh sách
+export const removeCenterMemberByMemberId = async (memberId: string) => {
+  const response = await axiosInstance.delete(`/centerMember/${memberId}`);
+  return response.data;
 };
 
 // Cập nhật role của member trong center

@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-// Using console logging instead of toast to avoid test failures
-import { getCenterMembers, CenterMember } from "../../api/centerMemberApi";
+import { getCenterMembers, CenterMember, removeCenterMemberByMemberId } from "../../api/centerMemberApi";
 import { getCenterById, Center } from "../../api/centerApi";
+import { useModal } from "../../components/ModalProvider";
+import { getMe } from "../../api/authApi";
 
 const CenterMembersPage: React.FC = () => {
   const { centerId } = useParams<{ centerId: string }>();
   const navigate = useNavigate();
+  const { confirm } = useModal();
   const [center, setCenter] = useState<Center | null>(null);
   const [members, setMembers] = useState<CenterMember[]>([]);
   const [loading, setLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [removingId, setRemovingId] = useState<string | null>(null);
 
   // Check admin
   const rolesRaw = localStorage.getItem("roles");
@@ -23,6 +27,30 @@ const CenterMembersPage: React.FC = () => {
   } catch {
     isAdmin = false;
   }
+
+  // Current user's role in this center (để biết có quyền xóa thành viên không)
+  const currentUserMember = members.find((m: any) => {
+    const uid = m._id || m.user_id?._id || m.user_id;
+    return uid && currentUserId && (uid === currentUserId || String(uid) === String(currentUserId));
+  });
+  const canRemoveMembers =
+    isAdmin ||
+    (currentUserMember &&
+      ["Center_Admin", "Manager"].includes((currentUserMember as any).role_in_center || ""));
+
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const me = await getMe();
+        if (me?.success && me?.data?._id) setCurrentUserId(me.data._id);
+        else if (me?.data?.id) setCurrentUserId(me.data.id);
+      } catch {
+        const uid = localStorage.getItem("userId");
+        if (uid) setCurrentUserId(uid);
+      }
+    };
+    loadUser();
+  }, []);
 
   useEffect(() => {
     if (centerId) {
@@ -71,7 +99,27 @@ const CenterMembersPage: React.FC = () => {
     }
   };
 
-  // Read-only page: no add/remove actions
+  // Xóa thành viên khỏi center (chỉ quản lý / admin)
+  const handleRemoveFromCenter = async (memberRecordId: string, displayName: string) => {
+    if (!memberRecordId) return;
+    const ok = await confirm({
+      title: "Xác nhận xóa khỏi center",
+      message: `Bạn có chắc muốn xóa "${displayName}" ra khỏi center này?`,
+      variant: "info",
+    });
+    if (!ok) return;
+    try {
+      setRemovingId(memberRecordId);
+      await removeCenterMemberByMemberId(memberRecordId);
+      await fetchMembers();
+    } catch (error: any) {
+      console.error("Remove from center failed", error);
+      const msg = error?.response?.data?.message || error?.message || "Không thể xóa thành viên.";
+      window.alert(msg);
+    } finally {
+      setRemovingId(null);
+    }
+  };
 
   // Handle member click to view their boards
   const handleMemberClick = (memberId: string) => {
@@ -188,12 +236,26 @@ const CenterMembersPage: React.FC = () => {
                         )}
                       </div>
                     </div>
-                    <button
-                      onClick={() => handleMemberClick(currentUserId)}
-                      className="w-full px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors"
-                    >
-                      View Boards
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleMemberClick(currentUserId)}
+                        className="flex-1 px-3 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+                      >
+                        View Boards
+                      </button>
+                      {canRemoveMembers && (member as any).member_id && (
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRemoveFromCenter((member as any).member_id, fullName || username);
+                          }}
+                          disabled={removingId === (member as any).member_id}
+                          className="px-3 py-2 rounded-md text-sm font-medium border border-red-500 text-red-600 hover:bg-red-50 disabled:opacity-60"
+                        >
+                          {removingId === (member as any).member_id ? "..." : "Xóa"}
+                        </button>
+                      )}
+                    </div>
                   </li>
                 );
               })}
@@ -257,12 +319,28 @@ const CenterMembersPage: React.FC = () => {
                         )}
                       </td>
                       <td className="px-4 py-3 text-center">
-                        <button
-                          onClick={() => handleMemberClick(currentUserId)}
-                          className="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
-                        >
-                          View Boards
-                        </button>
+                        <div className="flex items-center justify-center gap-2">
+                          <button
+                            onClick={() => handleMemberClick(currentUserId)}
+                            className="inline-flex items-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
+                          >
+                            View Boards
+                          </button>
+                          {canRemoveMembers && (member as any).member_id && (
+                            <button
+                              onClick={() =>
+                                handleRemoveFromCenter(
+                                  (member as any).member_id,
+                                  fullName || username
+                                )
+                              }
+                              disabled={removingId === (member as any).member_id}
+                              className="inline-flex items-center rounded-md border border-red-500 px-3 py-1.5 text-sm font-medium text-red-600 transition hover:bg-red-50 disabled:opacity-60"
+                            >
+                              {removingId === (member as any).member_id ? "..." : "Xóa khỏi center"}
+                            </button>
+                          )}
+                        </div>
                       </td>
                     </tr>
                   );
