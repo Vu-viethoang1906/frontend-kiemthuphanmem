@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ColumnManager from "../../components/BoardSetting/ColumnManager";
 import SwimlaneManager from "../../components/BoardSetting/SwimlaneManager";
 import SlackSettings from "../../components/BoardSetting/SlackSettings";
 import { fetchBoardById, updateBoard } from "../../api/boardApi";
+import { fetchBoardMembers, removeBoardMember } from "../../api/boardMemberApi";
+import { useModal } from "../../components/ModalProvider";
+import axiosInstance from "../../api/axiosInstance";
 import toast from "react-hot-toast";
 
 const BoardSettings: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { confirm } = useModal();
   const [activeTab, setActiveTab] = useState<
     "boardInfo" | "columns" | "swimlanes" | "slack"
   >("boardInfo");
@@ -20,6 +24,22 @@ const BoardSettings: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+
+  // Board members & current user (for Leave board)
+  const [boardMembers, setBoardMembers] = useState<any[]>([]);
+  const [me, setMe] = useState<any | null>(null);
+
+  const currentMemberUserIds = useMemo(
+    () =>
+      (boardMembers || [])
+        .map((m: any) => m?.user_id?._id || m?.user_id?.id || m?.user_id)
+        .filter(Boolean),
+    [boardMembers]
+  );
+  const isCurrentUserMember = useMemo(() => {
+    const myId = me?._id || me?.id;
+    return myId && currentMemberUserIds.includes(myId);
+  }, [me, currentMemberUserIds]);
 
   // Load board data
   useEffect(() => {
@@ -45,6 +65,63 @@ const BoardSettings: React.FC = () => {
     };
     loadBoard();
   }, [id]);
+
+  // Load board members and current user (for Leave board)
+  useEffect(() => {
+    if (!id) return;
+    const load = async () => {
+      try {
+        const [membersRes, meRes] = await Promise.all([
+          fetchBoardMembers(id),
+          axiosInstance.get("/user/me"),
+        ]);
+        const members = membersRes?.data?.data || membersRes?.data || [];
+        setBoardMembers(Array.isArray(members) ? members : []);
+        const userData = meRes?.data?.data || meRes?.data;
+        setMe(userData || null);
+      } catch {
+        setBoardMembers([]);
+        setMe(null);
+      }
+    };
+    load();
+  }, [id]);
+
+  const handleLeaveBoard = async () => {
+    const confirmed = await confirm({
+      title: "Rời board",
+      message:
+        "Bạn có chắc muốn rời board này? Bạn có thể được mời lại sau nếu cần.",
+      variant: "info",
+      confirmText: "Rời board",
+      cancelText: "Hủy",
+    });
+    if (!confirmed || !id) return;
+    const myId = me?._id || me?.id;
+    if (!myId) {
+      toast.error("Không xác định được tài khoản.");
+      return;
+    }
+    try {
+      await removeBoardMember(id, myId);
+      toast.success("Bạn đã rời board thành công.");
+      const rolesRaw = localStorage.getItem("roles");
+      let roles: string[] = [];
+      try {
+        roles = rolesRaw ? JSON.parse(rolesRaw) : [];
+      } catch {
+        roles = [];
+      }
+      const isAdmin = roles.some((r: string) =>
+        ["admin", "System_Manager"].includes(r)
+      );
+      navigate(isAdmin ? "/admin/projects" : "/dashboard/projects");
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.message || "Không thể rời board. Thử lại sau."
+      );
+    }
+  };
 
   // Handle save board info
   const handleSaveBoardInfo = async () => {
@@ -242,6 +319,23 @@ const BoardSettings: React.FC = () => {
                   }`}
                 />
               </div>
+
+              {/* Rời board - chỉ hiện khi user là thành viên */}
+              {isCurrentUserMember && (
+                <div className="pt-6 mt-6 border-t border-slate-200">
+                  <h3 className="text-lg font-semibold text-slate-800 mb-1">Rời board</h3>
+                  <p className="text-sm text-slate-600 mb-3">
+                    Bạn có thể rời board này bất cứ lúc nào. Bạn có thể được mời lại sau.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleLeaveBoard}
+                    className="px-4 py-2 border border-amber-300 text-amber-700 rounded-md hover:bg-amber-50 transition-colors font-medium text-sm"
+                  >
+                    Rời board
+                  </button>
+                </div>
+              )}
             </div>
           )}
           {activeTab === "columns" && <ColumnManager boardId={id} />}
