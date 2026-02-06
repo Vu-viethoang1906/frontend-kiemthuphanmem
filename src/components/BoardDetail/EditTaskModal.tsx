@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { generateTaskDescription } from "../../api/aiApi";
 import { getAIRecommendations, LearningResource } from "../../api/learningResourceApi";
 import { Sparkles, Loader2, BookOpen, Video, Code, ExternalLink } from "lucide-react";
+import { getDueDateWarning } from "../../utils/dueDateWarning";
 
 type Task = {
   _id?: string;
@@ -971,6 +972,17 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Due Date & Time
+                  {editingTask.due_date && (() => {
+                    const warning = getDueDateWarning(editingTask.due_date);
+                    if (warning.status === 'overdue' || warning.status === 'warning') {
+                      return (
+                        <span className={`ml-2 text-xs font-normal ${warning.status === 'overdue' ? 'text-red-600' : 'text-yellow-600'}`}>
+                          {warning.status === 'overdue' ? '⚠️ Quá hạn' : '⚠️ Sắp đến hạn'}
+                        </span>
+                      );
+                    }
+                    return null;
+                  })()}
                 </label>
                 <input
                   type="datetime-local"
@@ -982,9 +994,27 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                       due_date: isoValue || undefined,
                     });
                   }}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-900 cursor-pointer"
+                  className={`w-full px-4 py-2.5 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-200 text-gray-900 cursor-pointer ${
+                    editingTask.due_date ? (() => {
+                      const warning = getDueDateWarning(editingTask.due_date);
+                      if (warning.status === 'overdue') return 'border-red-300 bg-red-50';
+                      if (warning.status === 'warning') return 'border-yellow-300 bg-yellow-50';
+                      return 'border-gray-300';
+                    })() : 'border-gray-300'
+                  }`}
                   placeholder="Select due date and time"
                 />
+                {editingTask.due_date && (() => {
+                  const warning = getDueDateWarning(editingTask.due_date);
+                  if (warning.status === 'overdue' || warning.status === 'warning') {
+                    return (
+                      <p className={`mt-1 text-xs ${warning.status === 'overdue' ? 'text-red-600' : 'text-yellow-600'}`}>
+                        {warning.message}
+                      </p>
+                    );
+                  }
+                  return null;
+                })()}
               </div>
             </div>
           </div>

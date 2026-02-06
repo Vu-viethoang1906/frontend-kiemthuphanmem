@@ -13,6 +13,7 @@ import { updateTask, toggleTaskStar } from "../../api/taskApi";
 import { uploadFileToTask } from "../../api/fileApi";
 import toast from "react-hot-toast";
 import { getMe } from "../../api/authApi";
+import { getDueDateWarning } from "../../utils/dueDateWarning";
 import "../../styles/BoardDetail/TaskCard.css"; // Đảm bảo đường dẫn CSS đúng
 
 // Định nghĩa kiểu dữ liệu chính xác hơn cho Task
@@ -32,6 +33,15 @@ type Task = {
   tags?: any[];
   due_date?: string;
   starred_by?: string[] | any[];
+  recurring?: {
+    enabled: boolean;
+    frequency?: 'daily' | 'weekly' | 'monthly' | 'custom';
+    interval?: number;
+    paused?: boolean;
+    parent_task_id?: string;
+    created_count?: number;
+    next_create_at?: string;
+  };
 };
 
 interface TaskCardProps {
@@ -372,6 +382,12 @@ const TaskCard: React.FC<TaskCardProps> = ({
         new Date().setHours(0, 0, 0, 0)
     : false;
 
+  // ⚠️ Due Date Warning
+  const dueDateWarning = useMemo(() => {
+    if (!task.due_date) return null;
+    return getDueDateWarning(task.due_date);
+  }, [task.due_date]);
+
   const filteredMembers = useMemo(() => {
     // Lọc bỏ các member không có user_id
     const validMembers = members.filter((m) => m?.user_id);
@@ -583,6 +599,58 @@ const TaskCard: React.FC<TaskCardProps> = ({
         <div className="board-card__header">
           <div className="board-card__title">{task.title}</div>
           <div className="flex items-center gap-1">
+            {/* 🔄 Recurring indicator */}
+            {task.recurring?.enabled && (
+              <div
+                className="flex items-center justify-center w-6 h-6 p-0 bg-transparent border-0 rounded flex-shrink-0"
+                title={`Recurring: ${task.recurring.frequency || 'daily'} (${task.recurring.interval || 1}x)${task.recurring.paused ? ' - Paused' : ''}`}
+              >
+                <svg
+                  className={`w-4 h-4 ${task.recurring.paused ? 'text-gray-400' : 'text-blue-500'}`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                </svg>
+              </div>
+            )}
+
+            {/* ⚠️ Due Date Warning */}
+            {dueDateWarning && (dueDateWarning.status === 'overdue' || dueDateWarning.status === 'warning') && (
+              <div
+                className={`flex items-center justify-center w-6 h-6 p-0 bg-transparent border-0 rounded flex-shrink-0 ${dueDateWarning.status === 'overdue' ? 'text-red-500' : 'text-yellow-500'}`}
+                title={dueDateWarning.message}
+              >
+                {dueDateWarning.status === 'overdue' ? (
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                  </svg>
+                )}
+              </div>
+            )}
+
             {/* ⭐ Star/Favorite button */}
             {currentUserId && (
               <button
