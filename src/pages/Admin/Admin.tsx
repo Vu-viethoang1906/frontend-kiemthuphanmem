@@ -89,6 +89,7 @@ const Admin: React.FC = () => {
     { name: "Introduction", icon: "introduction", path: "/admin/introduction" },
     { name: "Dashboard", icon: "dashboard", path: "/admin" },
     { name: "Projects", icon: "projects", path: "/admin/projects" },
+    { name: "Backlog", icon: "reports", iconUrl: "/icons/scrum.png", path: "/admin/backlog" },
     { name: "Reports", icon: "reports", path: "/admin/reports" },
     { name: "Scheduled Reports", icon: "reports", iconUrl: "/icons/schedule.png", path: "/admin/reports/scheduled" },
     { name: "WorkControl", icon: "reports", iconUrl: "/icons/workcontrol.png", path: "/admin/work-control/work-forecast" },

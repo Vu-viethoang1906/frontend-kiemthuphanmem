@@ -105,6 +105,7 @@ const Dashboard = () => {
     { name: 'Introduction', icon: 'introduction', path: '/dashboard/introduction' },
     { name: 'Dashboard', icon: 'dashboard', path: '/dashboard' },
     { name: 'Projects', icon: 'projects', path: '/dashboard/projects', badge: projectsCount },
+    { name: 'Backlog', icon: 'reports', iconUrl: '/icons/scrum.png', path: '/dashboard/backlog' },
     { name: 'Reports', icon: 'reports', path: '/dashboard/reports' },
     // Only show analytics to admins/managers
     ...(isAdminOrManager

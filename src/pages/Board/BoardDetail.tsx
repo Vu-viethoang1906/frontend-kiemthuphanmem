@@ -919,7 +919,7 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
             if (result?.avatar_url) {
               avatars[userId] = result.avatar_url;
             }
-          } catch (error) {}
+          } catch (error) { }
         }
       }
       if (Object.keys(avatars).length > 0) {
@@ -2087,11 +2087,10 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
               {['Summary', 'Board', 'Chart'].map((tab) => (
                 <button
                   key={tab}
-                  className={`px-4 py-2 rounded-md font-medium text-sm transition-all whitespace-nowrap ${
-                    activeTab === tab
+                  className={`px-4 py-2 rounded-md font-medium text-sm transition-all whitespace-nowrap ${activeTab === tab
                       ? 'bg-white text-indigo-600 shadow-sm'
                       : 'text-gray-600 hover:text-gray-900 hover:bg-white/70'
-                  }`}
+                    }`}
                   onClick={() => setActiveTab(tab)}
                 >
                   {tab}
@@ -2497,9 +2496,8 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
                       filteredAvailableUsers.map((u: any) => (
                         <div
                           key={u._id}
-                          className={`flex items-center gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${
-                            selectedUserId === u._id ? 'bg-indigo-50' : ''
-                          }`}
+                          className={`flex items-center gap-3 p-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${selectedUserId === u._id ? 'bg-indigo-50' : ''
+                            }`}
                           onClick={() => setSelectedUserId(u._id)}
                         >
                           <div className="w-10 h-10 overflow-hidden bg-gray-300 flex items-center justify-center text-white">
