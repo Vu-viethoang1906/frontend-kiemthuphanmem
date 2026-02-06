@@ -4,12 +4,14 @@ import {
   fetchCommentsByTask,
   updateComment,
   deleteComment,
+  fetchBoardMembersByTask,
 } from '../api/commentApi';
 import { uploadFileToComment, downloadFile, deleteFileFromComment } from '../api/fileApi';
 import { summarizeComments } from '../api/nlpApi';
 import { socket } from '../socket';
 import toast from 'react-hot-toast';
 import { useModal } from './ModalProvider';
+import MentionAutocomplete from './MentionAutocomplete';
 
 export interface TaskComment {
   _id: string;
@@ -76,6 +78,16 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   } | null>(null);
   const [showSummary, setShowSummary] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const newCommentTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const replyTextareaRef = useRef<HTMLTextAreaElement>(null);
+  const [boardMembers, setBoardMembers] = useState<Array<{
+    _id: string;
+    username: string;
+    full_name?: string;
+    email?: string;
+    avatar_url?: string;
+    displayName: string;
+  }>>([]);
   const userId = localStorage.getItem('userId') || '';
   // Fallback to no-op modal in tests or when provider is absent
   const modalCtx = useSafeModal();
@@ -109,6 +121,39 @@ const CommentSection: React.FC<CommentSectionProps> = ({
   useEffect(() => {
     loadComments();
   }, [loadComments]);
+
+  // 🆕 Load board members for @mention autocomplete
+  useEffect(() => {
+    const loadBoardMembers = async () => {
+      if (!taskId) {
+        return;
+      }
+
+      try {
+        const res = await fetchBoardMembersByTask(taskId);
+        if (res && res.success && res.data) {
+          setBoardMembers(res.data);
+        } else {
+          console.warn('Failed to load board members: Invalid response', res);
+          setBoardMembers([]); // Set empty array để tránh lỗi
+        }
+      } catch (error: any) {
+        console.error('Failed to load board members:', error);
+        // Log chi tiết để debug
+        if (error.response) {
+          console.error('Response status:', error.response.status);
+          console.error('Response data:', error.response.data);
+        } else if (error.request) {
+          console.error('No response received:', error.request);
+        } else {
+          console.error('Error message:', error.message);
+        }
+        setBoardMembers([]); // Set empty array để tránh crash
+      }
+    };
+
+    loadBoardMembers();
+  }, [taskId]);
 
   // Socket listener for real-time comment updates
   useEffect(() => {
@@ -349,6 +394,38 @@ const CommentSection: React.FC<CommentSectionProps> = ({
     }
   };
 
+  // 🆕 Format comment content với @mentions highlighted
+  const formatCommentContent = (content: string, members: typeof boardMembers) => {
+    if (!content) return '';
+
+    let formatted = content;
+
+    // Escape HTML để tránh XSS
+    formatted = formatted
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+
+    // Replace @mentions với styled spans
+    members.forEach((member) => {
+      const username = member.username || '';
+      const fullName = member.full_name || '';
+      const displayName = member.displayName || username;
+
+      // Match @username hoặc @full_name
+      const regex = new RegExp(`@(${username}|${fullName})`, 'gi');
+      formatted = formatted.replace(
+        regex,
+        `<span style="background-color: #e3f2fd; color: #1976d2; padding: 2px 4px; border-radius: 3px; font-weight: 500;" data-user-id="${member._id}">@${username}</span>`
+      );
+    });
+
+    // Convert newlines to <br>
+    formatted = formatted.replace(/\n/g, '<br>');
+
+    return formatted;
+  };
+
   // Format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -584,9 +661,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
               whiteSpace: 'pre-wrap',
               wordBreak: 'break-word',
             }}
-          >
-            {comment.content}
-          </p>
+            dangerouslySetInnerHTML={{
+              __html: formatCommentContent(comment.content, boardMembers),
+            }}
+          />
         )}
 
         {/* Attachments section */}
@@ -700,11 +778,12 @@ const CommentSection: React.FC<CommentSectionProps> = ({
             </button>
 
             {replyingToId === comment._id && (
-              <div style={{ marginTop: '8px', marginLeft: '8px' }}>
+              <div style={{ marginTop: '8px', marginLeft: '8px', position: 'relative' }}>
                 <textarea
+                  ref={replyTextareaRef}
                   value={replyContent}
                   onChange={(e) => setReplyContent(e.target.value)}
-                  placeholder="Viết trả lời..."
+                  placeholder="Viết trả lời... (Type @ to mention someone)"
                   rows={2}
                   style={{
                     width: '100%',
@@ -716,6 +795,15 @@ const CommentSection: React.FC<CommentSectionProps> = ({
                     fontFamily: 'inherit',
                     marginBottom: '8px',
                   }}
+                />
+                <MentionAutocomplete
+                  value={replyContent}
+                  onChange={setReplyContent}
+                  onSelect={(user) => {
+                    toast.success(`Mentioned ${user.displayName}`);
+                  }}
+                  users={boardMembers}
+                  textareaRef={replyTextareaRef}
                 />
                 <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                   <button
@@ -1048,9 +1136,10 @@ const CommentSection: React.FC<CommentSectionProps> = ({
         {/* Textarea container with relative positioning */}
         <div style={{ position: 'relative' }}>
           <textarea
+            ref={newCommentTextareaRef}
             value={newComment}
             onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Add a comment..."
+            placeholder="Add a comment... (Type @ to mention someone)"
             rows={3}
             style={{
               width: '100%',
@@ -1070,6 +1159,16 @@ const CommentSection: React.FC<CommentSectionProps> = ({
               e.target.style.borderColor = '#dadce0';
               e.target.style.boxShadow = 'none';
             }}
+          />
+          <MentionAutocomplete
+            value={newComment}
+            onChange={setNewComment}
+            onSelect={(user) => {
+              // Optional: Show toast when user is mentioned
+              toast.success(`Mentioned ${user.displayName}`);
+            }}
+            users={boardMembers}
+            textareaRef={newCommentTextareaRef}
           />
           {/* Upload icon inside textarea */}
           <button

@@ -41,3 +41,9 @@ export const fetchMyComments = async () => {
   const res = await axiosInstance.get("/comments/user/my");
   return res.data;
 };
+
+// 🆕 Get board members by task ID for @mention autocomplete
+export const fetchBoardMembersByTask = async (taskId: string) => {
+  const res = await axiosInstance.get(`/comments/task/${taskId}/members`);
+  return res.data;
+};
