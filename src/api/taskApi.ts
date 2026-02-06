@@ -70,6 +70,18 @@ export const fetchMyAssignedTasks = async () => {
   return res.data;
 };
 
+// ⭐ Toggle star/favorite task
+export const toggleTaskStar = async (taskId: string) => {
+  const res = await axiosInstance.put(`/tasks/${taskId}/toggle-star`);
+  return res.data;
+};
+
+// ⭐ Get my starred tasks
+export const fetchMyStarredTasks = async () => {
+  const res = await axiosInstance.get(`/tasks/my/starred`);
+  return res.data;
+};
+
 // Get tasks by user
 export const fetchTasksByUser = async (userId: string) => {
   const res = await axiosInstance.get(`/tasks/user/${userId}`);

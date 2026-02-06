@@ -9,9 +9,10 @@ import { createPortal } from "react-dom";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { UniqueIdentifier } from "@dnd-kit/core";
-import { updateTask } from "../../api/taskApi";
+import { updateTask, toggleTaskStar } from "../../api/taskApi";
 import { uploadFileToTask } from "../../api/fileApi";
 import toast from "react-hot-toast";
+import { getMe } from "../../api/authApi";
 import "../../styles/BoardDetail/TaskCard.css"; // Đảm bảo đường dẫn CSS đúng
 
 // Định nghĩa kiểu dữ liệu chính xác hơn cho Task
@@ -30,6 +31,7 @@ type Task = {
   };
   tags?: any[];
   due_date?: string;
+  starred_by?: string[] | any[];
 };
 
 interface TaskCardProps {
@@ -90,6 +92,9 @@ const TaskCard: React.FC<TaskCardProps> = ({
   const [assigneeSearch, setAssigneeSearch] = useState<string>("");
   const [isAssigning, setIsAssigning] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [isStarring, setIsStarring] = useState(false);
+  const [isStarred, setIsStarred] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // --- DND-KIT SETUP ---
@@ -287,6 +292,37 @@ const TaskCard: React.FC<TaskCardProps> = ({
     setLocalAssignee(task.assigned_to);
   }, [task.assigned_to]);
 
+  // Load current user ID
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const me = await getMe();
+        const uid = me?.success && me?.data?._id ? me.data._id : (me?.data?.id || null);
+        if (uid) setCurrentUserId(uid);
+        else {
+          const stored = localStorage.getItem("userId");
+          if (stored) setCurrentUserId(stored);
+        }
+      } catch {
+        const stored = localStorage.getItem("userId");
+        if (stored) setCurrentUserId(stored);
+      }
+    };
+    loadUser();
+  }, []);
+
+  // Check if task is starred by current user
+  useEffect(() => {
+    if (!currentUserId || !task.starred_by) {
+      setIsStarred(false);
+      return;
+    }
+    const starredByIds = Array.isArray(task.starred_by)
+      ? task.starred_by.map((id: any) => (typeof id === 'object' ? id._id || id.id : id))
+      : [];
+    setIsStarred(starredByIds.includes(currentUserId));
+  }, [task.starred_by, currentUserId]);
+
   // Memoize members list for rendering performance
   const memoizedMembers = useMemo(() => members, [members]);
 
@@ -466,6 +502,57 @@ const TaskCard: React.FC<TaskCardProps> = ({
     e.stopPropagation();
   };
 
+  // ⭐ Toggle star/favorite task
+  const handleToggleStar = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+    console.log('[TaskCard] handleToggleStar called', { currentUserId, isStarring, taskId: task._id || task.id });
+    
+    if (!currentUserId) {
+      console.error('[TaskCard] No currentUserId');
+      toast.error('Không tìm thấy thông tin user');
+      return;
+    }
+    
+    if (isStarring) {
+      console.log('[TaskCard] Already starring, skip');
+      return;
+    }
+
+    const taskId = task._id || task.id;
+    if (!taskId) {
+      console.error('[TaskCard] No taskId', { task });
+      toast.error('Không tìm thấy ID của task');
+      return;
+    }
+
+    console.log('[TaskCard] Calling toggleTaskStar API', { taskId, currentUserId });
+    setIsStarring(true);
+    try {
+      const result = await toggleTaskStar(taskId);
+      console.log('[TaskCard] toggleTaskStar success', result);
+      setIsStarred(result.is_starred);
+      toast.success(result.message || (result.is_starred ? 'Đã đánh dấu task quan trọng' : 'Đã bỏ đánh dấu'));
+      reloadTasks();
+    } catch (err: any) {
+      console.error('[TaskCard] toggleTaskStar error:', {
+        message: err?.message,
+        response: err?.response?.data,
+        status: err?.response?.status,
+        statusText: err?.response?.statusText,
+        url: err?.config?.url,
+        method: err?.config?.method,
+        taskId,
+        currentUserId,
+      });
+      const msg = err?.response?.data?.message || err?.message || 'Không thể đánh dấu task';
+      toast.error(msg);
+    } finally {
+      setIsStarring(false);
+    }
+  };
+
   return (
     <>
       <div
@@ -495,8 +582,62 @@ const TaskCard: React.FC<TaskCardProps> = ({
 
         <div className="board-card__header">
           <div className="board-card__title">{task.title}</div>
-          {/* Upload file button */}
-          <button
+          <div className="flex items-center gap-1">
+            {/* ⭐ Star/Favorite button */}
+            {currentUserId && (
+              <button
+                className={`flex items-center justify-center w-6 h-6 p-0 bg-transparent border-0 rounded cursor-pointer transition-all duration-200 flex-shrink-0 focus:outline-none ${
+                  isStarred
+                    ? 'text-yellow-500 hover:text-yellow-600'
+                    : 'text-gray-400 hover:text-yellow-500 opacity-70 hover:opacity-100'
+                } ${isStarring ? 'opacity-50 cursor-wait' : ''}`}
+                onClick={handleToggleStar}
+                onMouseDown={(e) => e.stopPropagation()}
+                onPointerDown={(e) => e.stopPropagation()}
+                type="button"
+                disabled={isStarring}
+                title={isStarred ? 'Bỏ đánh dấu task quan trọng' : 'Đánh dấu task quan trọng'}
+              >
+                {isStarring ? (
+                  <svg
+                    className="w-4 h-4 animate-spin"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <circle cx="12" cy="12" r="10" strokeDasharray="31.416" strokeDashoffset="31.416">
+                      <animate
+                        attributeName="stroke-dasharray"
+                        dur="2s"
+                        values="0 31.416;15.708 15.708;0 31.416;0 31.416"
+                        repeatCount="indefinite"
+                      />
+                      <animate
+                        attributeName="stroke-dashoffset"
+                        dur="2s"
+                        values="0;-15.708;-31.416;-31.416"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </svg>
+                ) : (
+                  <svg
+                    className="w-4 h-4"
+                    viewBox="0 0 24 24"
+                    fill={isStarred ? 'currentColor' : 'none'}
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                  </svg>
+                )}
+              </button>
+            )}
+            {/* Upload file button */}
+            <button
             className="flex items-center justify-center w-6 h-6 p-0 bg-transparent border-0 rounded cursor-pointer text-gray-500 transition-all duration-200 flex-shrink-0 opacity-70 hover:bg-gray-100 hover:text-blue-500 hover:opacity-100 hover:-translate-y-0.5 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none"
             onClick={handleUploadClick}
             onMouseDown={handleUploadMouseDown}
@@ -550,6 +691,7 @@ const TaskCard: React.FC<TaskCardProps> = ({
               </svg>
             )}
           </button>
+          </div>
         </div>
 
         {/* Tags và Avatar cùng hàng */}

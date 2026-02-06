@@ -61,6 +61,7 @@ import LearningPath from './pages/Learning/LearningPath';
 import AdaptiveGamification from './pages/Gamification/AdaptiveGamification';
 import ScheduledReports from './pages/Reports/ScheduledReports';
 import BacklogPage from './pages/Backlog/BacklogPage';
+import MyStarredTasks from './pages/Tasks/MyStarredTasks';
 
 // Component để redirect /calendar callback về Settings
 const CalendarCallbackRedirect: React.FC<{ isAdmin: boolean }> = ({ isAdmin }) => {
@@ -211,6 +212,7 @@ function AnimatedRoutes() {
         <Route path="project/:id/:taskId" element={<BoardDetail />} />
         <Route path="project/:id/members" element={<BoardMembersPage />} />
         <Route path="backlog" element={<BacklogPage />} />
+        <Route path="tasks/starred" element={<MyStarredTasks />} />
       </Route>
 
       {/* Admin with nested routes */}
@@ -294,6 +296,7 @@ function AnimatedRoutes() {
         <Route path="project/:id/members" element={<BoardMembersPage />} />
         <Route path="groups/:groupId/board/user/:userId" element={<BoardMember />} />
         <Route path="backlog" element={<BacklogPage />} />
+        <Route path="tasks/starred" element={<MyStarredTasks />} />
       </Route>
 
       {/* Standalone routes for backward compatibility - redirect to dashboard/admin */}
