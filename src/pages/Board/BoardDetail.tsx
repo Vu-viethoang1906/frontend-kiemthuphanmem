@@ -48,6 +48,7 @@ import {
   TagManagerModal,
   FilterDropdown,
 } from '../../components/BoardDetail';
+import QuickFilters, { QuickFilterType } from '../../components/BoardDetail/QuickFilters';
 
 // Dnd-kit Imports
 import {
@@ -369,6 +370,9 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
   const [showSearchBox, setShowSearchBox] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [filterTagSearch, setFilterTagSearch] = useState<string>('');
+  
+  // 🔍 Quick Filters state
+  const [activeQuickFilters, setActiveQuickFilters] = useState<QuickFilterType[]>([]);
   // NLP Search states - tách riêng
   const [nlpSearchQuery, setNlpSearchQuery] = useState<string>('');
   const [isSearchingNLP, setIsSearchingNLP] = useState(false);
@@ -571,8 +575,54 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
       });
     }
 
+    // 🔍 Quick Filters (áp dụng với AND logic)
+    if (activeQuickFilters.length > 0) {
+      const currentUserId = me?._id || me?.id;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+
+      filtered = filtered.filter((task) => {
+        // My Tasks: Task được assign cho current user
+        if (activeQuickFilters.includes('my_tasks')) {
+          const assignedToId = task.assigned_to?._id || task.assigned_to?.id || task.assigned_to;
+          if (!assignedToId || assignedToId.toString() !== currentUserId?.toString()) {
+            return false;
+          }
+        }
+
+        // Due Today: Task có due_date là hôm nay
+        if (activeQuickFilters.includes('due_today')) {
+          if (!task.due_date) return false;
+          const dueDate = new Date(task.due_date);
+          dueDate.setHours(0, 0, 0, 0);
+          if (dueDate.getTime() !== today.getTime()) {
+            return false;
+          }
+        }
+
+        // High Priority: Task có priority = "High"
+        if (activeQuickFilters.includes('high_priority')) {
+          if (task.priority !== 'High') {
+            return false;
+          }
+        }
+
+        // Unassigned: Task không có assigned_to
+        if (activeQuickFilters.includes('unassigned')) {
+          const assignedToId = task.assigned_to?._id || task.assigned_to?.id || task.assigned_to;
+          if (assignedToId) {
+            return false;
+          }
+        }
+
+        return true;
+      });
+    }
+
     return filtered;
-  }, [tasks, selectedFilterTagIds, searchQuery, nlpSearchQuery, nlpSearchResults]);
+  }, [tasks, selectedFilterTagIds, searchQuery, nlpSearchQuery, nlpSearchResults, activeQuickFilters, me]);
 
   // Lập bản đồ các task theo cột và swimlane
   const tasksByColumnAndSwimlane = useMemo(() => {
@@ -2231,6 +2281,21 @@ const BoardDetail: React.FC<BoardDetailProps> = ({ boardId, onBoardLoaded, onBac
                     }
                   }}
                   onClearAll={() => setSelectedFilterTagIds([])}
+                />
+
+                {/* 🔍 Quick Filters */}
+                <QuickFilters
+                  activeFilters={activeQuickFilters}
+                  onToggleFilter={(filter) => {
+                    setActiveQuickFilters((prev) => {
+                      if (prev.includes(filter)) {
+                        return prev.filter((f) => f !== filter);
+                      } else {
+                        return [...prev, filter];
+                      }
+                    });
+                  }}
+                  onClearAll={() => setActiveQuickFilters([])}
                 />
 
                 <button
