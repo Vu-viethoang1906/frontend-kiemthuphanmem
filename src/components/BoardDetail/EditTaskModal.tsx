@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import "../../styles/BoardDetail/CreateTaskModal.css";
 import CommentSection, { TaskComment } from "../CommentSection";
 import ChecklistSection from "./ChecklistSection";
+import SubtaskList from "./SubtaskList";
 import { downloadFile, deleteFileFromTask, uploadFileToTask } from "../../api/fileApi";
 import {
   isoToDateTimeLocal,
@@ -41,8 +42,8 @@ type Task = {
     size?: number;
     mime_type?: string;
     uploaded_by?:
-      | { username: string; full_name?: string; _id?: string }
-      | string;
+    | { username: string; full_name?: string; _id?: string }
+    | string;
     uploaded_at?: string | Date;
     url?: string;
   }>;
@@ -126,7 +127,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
   useEffect(() => {
     const loadLearningResources = async () => {
       if (!showLearningResources) return;
-      
+
       if (!editingTask?._id && !editingTask?.id) {
         setLearningResources(null);
         return;
@@ -141,7 +142,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
             return;
           }
           const result = await getAIRecommendations(taskId, true);
-          
+
           if (result.success) {
             setLearningResources({
               tutorials: result.tutorials || [],
@@ -265,10 +266,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
 
                       if (response.status === "success" && response.data.success) {
                         const { description, acceptanceCriteria, subtasks } = response.data;
-                        
+
                         // Cập nhật description
                         let newDescription = description || "";
-                        
+
                         // Thêm acceptance criteria nếu có
                         if (acceptanceCriteria && acceptanceCriteria.length > 0) {
                           newDescription += "\n\n**Tiêu chí chấp nhận:**\n";
@@ -276,7 +277,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                             newDescription += `${index + 1}. ${criteria}\n`;
                           });
                         }
-                        
+
                         // Thêm subtasks nếu có
                         if (subtasks && subtasks.length > 0) {
                           newDescription += "\n**Subtasks:**\n";
@@ -298,8 +299,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                     } catch (error: any) {
                       console.error("Error generating task description:", error);
                       toast.error(
-                          error?.response?.data?.error ||
-                          "Cannot connect to AI. Please try again."
+                        error?.response?.data?.error ||
+                        "Cannot connect to AI. Please try again."
                       );
                     } finally {
                       setIsGeneratingAI(false);
@@ -361,6 +362,16 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                 />
               </div>
             )}
+
+            {/* Subtask Section */}
+            {(editingTask._id || editingTask.id) && (
+              <SubtaskList
+                taskId={(editingTask._id || editingTask.id) as string}
+                members={boardMembers}
+                onUpdate={onUpdate}
+              />
+            )}
+
 
             {/* Assigned To & Tags */}
             <div className="grid grid-cols-2 gap-4">
@@ -539,7 +550,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                                       console.error("Delete failed:", err);
                                       toast.error(
                                         err?.response?.data?.message ||
-                                          "Unable to delete file"
+                                        "Unable to delete file"
                                       );
                                     } finally {
                                       setIsDeletingFile(false);
@@ -661,7 +672,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                       try {
                         await uploadFileToTask(taskId, file);
                         toast.success(`File "${file.name}" uploaded successfully!`);
-                        
+
                         // Reload task to show updated attachments
                         if (onUpdate) {
                           // Trigger a reload by calling onUpdate
@@ -676,8 +687,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                         console.error("Upload error:", err);
                         toast.error(
                           err?.response?.data?.message ||
-                            err?.message ||
-                            "Failed to upload file"
+                          err?.message ||
+                          "Failed to upload file"
                         );
                       } finally {
                         setIsUploadingFile(false);
@@ -701,9 +712,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                             ? file.url
                             : `http://localhost:3005${file.url}`
                           : null;
-                        const key = `${file.commentId}-${
-                          file.attachmentIndex
-                        }-${file.stored_name || file.original_name}`;
+                        const key = `${file.commentId}-${file.attachmentIndex
+                          }-${file.stored_name || file.original_name}`;
 
                         return (
                           <div
@@ -857,11 +867,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                                 type="button"
                                 onMouseDown={(e) => e.preventDefault()}
                                 onClick={() => onTagSelect(tagId, tag.name)}
-                                className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm transition-colors ${
-                                  isSelected
-                                    ? "bg-blue-50 text-blue-600 font-semibold"
-                                    : "hover:bg-gray-50 text-gray-700"
-                                }`}
+                                className={`w-full flex items-center gap-3 px-3 py-2 text-left text-sm transition-colors ${isSelected
+                                  ? "bg-blue-50 text-blue-600 font-semibold"
+                                  : "hover:bg-gray-50 text-gray-700"
+                                  }`}
                               >
                                 <span
                                   className="w-3 h-3 rounded-full border border-gray-200"
@@ -889,8 +898,8 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                               t.name.toLowerCase() ===
                               tagSearchInput.toLowerCase()
                           )
-                        ? `➕ New tag "${tagSearchInput}" will be created`
-                        : "Select a tag or type a new name"}
+                          ? `➕ New tag "${tagSearchInput}" will be created`
+                          : "Select a tag or type a new name"}
                     </div>
                   )}
                 </div>
@@ -1028,7 +1037,7 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                   <div className="text-sm font-medium text-gray-900">
                     {typeof editingTask.created_by === "object"
                       ? editingTask.created_by?.full_name ||
-                        editingTask.created_by?.username
+                      editingTask.created_by?.username
                       : "N/A"}
                   </div>
                 </div>
@@ -1180,10 +1189,10 @@ const EditTaskModal: React.FC<EditTaskModalProps> = ({
                         {(!learningResources.tutorials?.length &&
                           !learningResources.videos?.length &&
                           !learningResources.codeExamples?.length) && (
-                          <div className="text-center py-6 text-sm text-gray-500">
-                            Không tìm thấy tài liệu học tập liên quan
-                          </div>
-                        )}
+                            <div className="text-center py-6 text-sm text-gray-500">
+                              Không tìm thấy tài liệu học tập liên quan
+                            </div>
+                          )}
                       </>
                     ) : (
                       <div className="text-center py-6 text-sm text-gray-500">

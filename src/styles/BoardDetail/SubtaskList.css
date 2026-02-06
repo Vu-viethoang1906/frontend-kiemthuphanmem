@@ -1,0 +1,92 @@
+/* Subtask List Container */
+.subtask-list-container {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.subtask-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.subtask-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subtask-count {
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+}
+
+.btn-add-subtask {
+  padding: 6px 12px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-add-subtask:hover {
+  background: #2563eb;
+}
+
+/* Progress Bar */
+.subtask-progress {
+  margin-bottom: 16px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Subtask Items */
+.subtask-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Loading & Empty States */
+.subtask-loading,
+.subtask-empty {
+  padding: 24px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.subtask-empty {
+  background: white;
+  border-radius: 6px;
+  border: 1px dashed #d1d5db;
+}
